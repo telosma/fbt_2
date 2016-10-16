@@ -12,7 +12,7 @@ class Place extends Model
         'name',
     ];
 
-    public tours()
+    public function tours()
     {
         return $this->belongsToMany(Tour::class, 'destinations', 'place_id', 'tour_id');
     }
