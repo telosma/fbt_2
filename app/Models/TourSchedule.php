@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\{Tour, Booking}
+use App\Models\{Tour, Booking};
 
 class TourSchedule extends Model
 {
