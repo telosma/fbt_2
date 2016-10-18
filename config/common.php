@@ -9,4 +9,7 @@ return [
         'warning' => 'warning',
         'danger' => 'danger',
     ],
+    'limit' => [
+        'page_limit' => 10,
+    ],
 ];
