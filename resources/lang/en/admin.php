@@ -6,4 +6,5 @@ return [
     'logo' => 'Admin',
     'home' => 'Home',
     'read_all_message' => 'Read All Messages',
+    'upload_response' => 'Upload :response!',
 ];

@@ -5,7 +5,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('page_title')</title>
         @include('includes.adminStyle')
-        @yield('style')
+        @stack('styles')
+        @stack('header')
     </head>
     <body>
         @include('includes.adminMenu')
@@ -33,6 +34,6 @@
         </div>
         <!-- /#wrapper -->
         @include('includes.adminScript')
-        @yield('script')
+        @stack('scripts')
     </body>
 </html>
