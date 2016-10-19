@@ -11,8 +11,16 @@
 |
 */
 
-Route::get('/', function() {
-    return view('welcome');
+Route::get('/', [
+    'as' => 'home',
+    'uses' => 'HomeController@getHome',
+]);
+
+Route::group(['middleware' => 'email'], function() {
+    Route::post('signup', [
+        'as' => 'postSignup',
+        'uses' => 'AuthUserController@postSignup',
+    ]);
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {

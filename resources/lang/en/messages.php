@@ -6,4 +6,5 @@ return [
     'db_delete_error' => 'Failed delete item',
     'db_null' => 'Not available data',
     'db_update_error' => 'Failed to update',
+    'success_signup' => 'Register successful',
 ];
