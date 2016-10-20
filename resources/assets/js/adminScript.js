@@ -3,12 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function message(id, s, m) {
-    $(id).removeClass();
-    $(id).addClass('alert alert-' + s);
-    $(id).html(m);
-    $(id).slideDown();
-    $(id).delay(3000).slideUp();
+
+function message(text, type, timeout) {
+    noty({
+        text: text,
+        type: type,
+        theme: 'relax',
+        layout: 'topRight',
+        timeout: typeof timeout === 'Number' ? timeout : 5000,
+        dismissQueue: true,
+        maxVisible: 10,
+        animation: {
+            layout: 'topRight',
+            open: 'animated bounceInRight',
+            close: 'animated bounceOutRight',
+            easing: 'swing',
+            speed: 1000,
+        }
+    });
 }
 $(document).ready(function () {
     $('#side-menu').metisMenu();

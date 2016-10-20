@@ -12,3 +12,5 @@
 {!! Html::style('css/sb-admin-2.css') !!}
 <!-- Fonts Awesome-->
 {!! Html::style('css/font-awesome.min.css') !!}
+<!-- Animate.css -->
+{!! Html::style('css/animate.min.css') !!}
