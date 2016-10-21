@@ -12,4 +12,8 @@ return [
     'limit' => [
         'page_limit' => 10,
     ],
+    'textarea' => [
+        'rows' => 10,
+        'cols' => 80,
+    ]
 ];
