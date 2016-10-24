@@ -14,3 +14,5 @@
 {!! Html::script('js/adminScript.js') !!}
 {!! Html::script('js/jquery.serialize-object.min.js') !!}
 {!! Html::script('js/jquery.form.js') !!}
+<!-- Noty -->
+{!! Html::script('js/jquery.noty.packaged.min.js') !!}

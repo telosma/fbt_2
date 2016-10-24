@@ -35,6 +35,7 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/blueimp-file-upload/js/vendor/jquery.ui.widget.js', publicDest[0]],
         ['vendor/bower_dl/blueimp-file-upload/js/jquery.iframe-transport.js', publicDest[0]],
         ['vendor/bower_dl/blueimp-file-upload/js/jquery.fileupload.js', publicDest[0]],
+        ['vendor/bower_dl/noty/js/noty/packaged/jquery.noty.packaged.min.js', publicDest[0]],
         //cssCopyPath
         ['vendor/bower_dl/metisMenu/dist/metisMenu.min.css', publicDest[1]],
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
@@ -48,6 +49,7 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/datatables.net-buttons-dt/css/buttons.dataTables.min.css', publicDest[1]],
         ['vendor/bower_dl/EasyAutocomplete/dist/easy-autocomplete.min.css', publicDest[1]],
         ['vendor/bower_dl/hover/css/hover-min.css', publicDest[1]],
+        ['vendor/bower_dl/animate.css/animate.min.css', publicDest[1]],
         //fontsCopyPath
         ['vendor/bower_dl/bootstrap/dist/fonts/**', publicDest[2]],
         ['vendor/bower_dl/font-awesome/fonts/**', publicDest[2]],

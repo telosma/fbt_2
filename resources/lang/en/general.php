@@ -7,4 +7,6 @@ return [
         'success' => 'success',
         'fail' => 'fail',
     ],
+    'unknown_error' => 'Unknown error! code: ',
+    'comfirm_login' => 'You have to login to do this action',
 ];
