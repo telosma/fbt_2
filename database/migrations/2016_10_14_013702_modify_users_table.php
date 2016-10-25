@@ -13,7 +13,7 @@ class ModifyUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('password', 50)->nullable()->default(null)->change();
+            $table->string('password')->nullable()->default(null)->change();
             $table->tinyInteger('role')->default(0);
             $table->string('avatar_link', 200);
             $table->tinyInteger('type');

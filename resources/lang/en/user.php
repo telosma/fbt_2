@@ -9,5 +9,7 @@ return [
     ],
     'message' => [
         'success_signup' => 'Register successful',
+        'success_signin' => ':email login successed',
+        'failed_signin' => 'Login failed',
     ],
 ];

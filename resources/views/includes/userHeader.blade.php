@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-8 col-sm-6 col-xs-6">
         <ul class="nav navbar-nav my-navbar-right">
-            <li>
+            <li class="elastic-search-box">
                 {!! Form::open(['url' => '', 'method' => 'get']) !!}
                     {!! Form::text('query', null, ['id' => 'input-autocomplete', 'class' => 'search-box']) !!}
                     {!! Form::submit(trans('label.search'), ['class' => 'btn btn-info']) !!}
@@ -24,13 +24,13 @@
                 <li>
                     <div class="dropdown-toggle dropdown-user header-option" data-toggle="dropdown">
                         <img class="circle small" src="{{ asset(config('asset.default_avatar')) }}" alt="avt-img">
-                        Name
+                        {{ Auth::user()->name }}
                         <span class="caret"></span>
                     </div>
                     <ul class="dropdown-menu pull-right dropdown-user-menu">
                         <li><a href="#">{{ trans('user.profile') }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">{{ trans('user.action.logout') }}</a></li>
+                        <li><a href="{{ route('signout') }}">{{ trans('user.action.logout') }}</a></li>
                     </ul>
                 </li>
             @else

@@ -92,6 +92,9 @@ ul>li>a {
 .dropdown-user-menu {
     position: absolute!important;
 }
+.elastic-search-box {
+    margin-right: 30px!important;
+}
 /*
     Wrapper style
 */
