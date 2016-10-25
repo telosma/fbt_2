@@ -296,3 +296,50 @@ a, a:hover {
 .page-content .content-section {
     margin-top: 150px;
 }
+/*
+    Notification
+*/
+.notification {
+    position: fixed;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    border-radius: 4px;
+    font-weight: 700;
+    align-items: stretch;
+    perspective: 1000px;
+    opacity: 0.6;
+    z-index: 2016;
+}
+.notification .icon {
+    padding: 20px;
+    color: white;
+    border-radius: 4px 0px 0px 4px;
+    overflow: hidden;
+}
+.notification .text {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 0px 4px 4px 0px;
+}
+.notification:hover {
+    opacity: 1;
+}
+.success-notification .icon {
+    background: #0097A7;
+}
+.success-notification .text {
+    background: rgb(51, 153, 255);
+}
+.danger-notification .icon {
+    background: rgb(255, 0, 0);
+}
+.danger-notification .text {
+    background: rgb(255, 102, 102);
+}
+/*
+    /Notification style
+*/

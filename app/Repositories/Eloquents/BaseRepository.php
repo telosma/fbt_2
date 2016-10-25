@@ -6,8 +6,9 @@ use Exception;
 use DB;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\Contracts\RepositoryInterface;
 
-abstract class BaseRepository
+abstract class BaseRepository implements RepositoryInterface
 {
     protected $model;
     protected $app;
@@ -113,7 +114,7 @@ abstract class BaseRepository
             $data = $this->model->create($params);
             if (!$data) {
                 return [
-                    'status' = false,
+                    'status' => false,
                     'message' => trans('messages.db_create_error'),
                 ];
             }
