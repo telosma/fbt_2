@@ -83,7 +83,7 @@
                     </div>
                     <div class="col-md-7 col-md-offset-1">
                         <h4>{{ trans('label.new_register') }}</h4>
-                        {!! Form::open(['url' => '', 'method' => 'post']) !!}
+                        {!! Form::open(['route' => 'signup', 'method' => 'post']) !!}
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">

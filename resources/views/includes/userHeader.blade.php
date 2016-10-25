@@ -20,20 +20,27 @@
                     {!! Form::submit(trans('label.search'), ['class' => 'btn btn-info']) !!}
                 {!! Form::close() !!}
             </li>
-            <li><a data-toggle="modal" data-target="#login-modal">{{ trans('user.action.login') }}</a></li>
-            <li><a class="last-element" data-toggle="modal" data-target="#register-modal">{{ trans('user.action.register') }}</a></li>
-            <li>
-                <div class="dropdown-toggle dropdown-user header-option" data-toggle="dropdown">
-                    <img class="circle small" src="{{ config('asset.default_avatar') }}" alt="avt-img">
-                    Name
-                    <span class="caret"></span>
-                </div>
-                <ul class="dropdown-menu pull-right dropdown-user-menu">
-                    <li><a href="#">{{ trans('user.profile') }}</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">{{ trans('user.action.logout') }}</a></li>
-                </ul>
-            </li>
+            @if (Auth::check())
+                <li>
+                    <div class="dropdown-toggle dropdown-user header-option" data-toggle="dropdown">
+                        <img class="circle small" src="{{ asset(config('asset.default_avatar')) }}" alt="avt-img">
+                        Name
+                        <span class="caret"></span>
+                    </div>
+                    <ul class="dropdown-menu pull-right dropdown-user-menu">
+                        <li><a href="#">{{ trans('user.profile') }}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">{{ trans('user.action.logout') }}</a></li>
+                    </ul>
+                </li>
+            @else
+                <li>
+                    <a data-toggle="modal" data-target="#login-modal">{{ trans('user.action.login') }}</a>
+                </li>
+                <li>
+                    <a class="last-element" data-toggle="modal" data-target="#register-modal">{{ trans('user.action.register') }}</a>
+                </li>
+            @endif
         </ul>
     </div>
 </nav>

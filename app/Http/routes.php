@@ -16,6 +16,11 @@ Route::get('/', [
     'uses' => 'HomeController@getHome',
 ]);
 
+Route::post('signup', [
+    'as' => 'signup',
+    'uses' => 'AuthUserController@postSignup',
+]);
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
 });

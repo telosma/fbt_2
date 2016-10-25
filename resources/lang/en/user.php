@@ -7,4 +7,7 @@ return [
         'login' => 'Login',
         'register' => 'Register',
     ],
+    'message' => [
+        'success_signup' => 'Register successful',
+    ],
 ];

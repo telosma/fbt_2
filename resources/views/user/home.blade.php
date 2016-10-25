@@ -5,6 +5,8 @@
     {!! Html::style('css/tourPreview.css') !!}
 @endsection
 @section('content')
+    @include('includes.notification')
+    @include('includes.error')
     <section class="page-content">
         <div id="products" class="content-section">
             <div class="container">

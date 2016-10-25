@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\{Review, Comment, BankAccount, SocialUser};
+use Hash;
 
 class User extends Authenticatable
 {
@@ -50,4 +51,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(SocialUser::class, 'user_id');
     }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst($value);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }    
 }
