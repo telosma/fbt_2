@@ -7,4 +7,18 @@ return [
     'home' => 'Home',
     'read_all_message' => 'Read All Messages',
     'upload_response' => 'Upload :response!',
+    'list' => 'List :name',
+    'category' => 'category',
+    'update' => 'Update',
+    'create' => 'Create',
+    'save' => 'Save',
+    'responses' => [
+        'create' => 'Create :status!',
+        'update' => 'Update :status!',
+        'delete' => 'Delete :status!',
+    ],
+    'status' => [
+        'success' => 'success',
+        'fail' => 'fail',
+    ]
 ];
