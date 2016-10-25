@@ -28,6 +28,11 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 });
 
+Route::post('signup', [
+    'as' => 'signup',
+    'uses' => 'AuthUserController@postSignup',
+]);
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
     Route::group(['prefix' => 'category'], function () {

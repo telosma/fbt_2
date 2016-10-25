@@ -15,7 +15,7 @@
                         <p class="notice-miss">{!! trans('label.notice_miss') !!}</p>
                         <a class="btn-gohome" href="{{ route('home') }}">
                             {{ trans('label.brand') }}
-                            <img src="{{ config('asset.btn_gohome') }}">
+                            <img src="{{ asset(config('asset.btn_gohome')) }}">
                         </a>
                     </div>
                     <div class="col-lg-3"></div>
