@@ -23,7 +23,7 @@
             @if (Auth::check())
                 <li>
                     <div class="dropdown-toggle dropdown-user header-option" data-toggle="dropdown">
-                        <img class="circle small" src="{{ asset(config('asset.default_avatar')) }}" alt="avt-img">
+                        <img class="circle small" src="{{ Auth::user()->avatar_link }}" alt="avt-img">
                         Name
                         <span class="caret"></span>
                     </div>

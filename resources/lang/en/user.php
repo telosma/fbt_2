@@ -9,5 +9,6 @@ return [
     ],
     'message' => [
         'success_signup' => 'Register successful',
+        'success_via' => 'Login success via :provider',
     ],
 ];

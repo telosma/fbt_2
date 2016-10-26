@@ -16,6 +16,13 @@ Route::get('/', [
     'uses' => 'HomeController@getHome',
 ]);
 
+Route::get('auth/{provider}', [
+    'as' => 'redirectToProvider',
+    'uses' => 'AuthSocialController@redirectToProvider'
+]);
+
+Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
+
 Route::post('signup', [
     'as' => 'signup',
     'uses' => 'AuthUserController@postSignup',
