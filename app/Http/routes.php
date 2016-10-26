@@ -33,6 +33,13 @@ Route::post('signup', [
     'uses' => 'AuthUserController@postSignup',
 ]);
 
+Route::get('auth/{provider}', [
+    'as' => 'redirectToProvider',
+    'uses' => 'AuthSocialController@redirectToProvider'
+]);
+
+Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
     Route::group(['prefix' => 'category'], function () {

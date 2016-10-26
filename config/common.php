@@ -17,5 +17,10 @@ return [
     'textarea' => [
         'rows' => 10,
         'cols' => 80,
-    ]
+    ],
+    'provider' => [
+        'facebook' => 'facebook',
+        'google' => 'google',
+        'github' => 'github',
+    ],
 ];
