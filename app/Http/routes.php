@@ -16,6 +16,18 @@ Route::get('/', [
     'uses' => 'HomeController@getHome',
 ]);
 
+Route::post('signin', [
+    'as' => 'signin',
+    'uses' => 'AuthUserController@postSignin',
+]);
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('signout', [
+        'as' => 'signout',
+        'uses' => 'AuthUserController@getSignout',
+    ]);
+});
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
 });
