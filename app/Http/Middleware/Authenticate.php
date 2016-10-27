@@ -22,7 +22,10 @@ class Authenticate
                 return response('Unauthorized.', 401);
             }
 
-            return redirect()->guest('login');
+            return redirect()->guest('/')->with([
+                config('common.flash_notice') => trans('user.message.auth_require'),
+                config('common.flash_level_key') => config('common.flash_level.danger')
+            ]);
         }
 
         return $next($request);
