@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\SignupRequest;
+use App\Http\Requests\SigninRequest;
 use App\Repositories\Eloquents\UserRepository;
 use Auth;
 
@@ -30,6 +31,37 @@ class AuthUserController extends Controller
                 config('common.flash_notice') => trans('user.message.success_signup'),
                 config('common.flash_level_key') => config('common.flash_level.success')
             ]);
+        }
+    }
+
+    public function postSignin(SigninRequest $request)
+    {
+        $loginSuccess = Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+        if ($loginSuccess) {
+            $message = [
+                config('common.flash_notice') => trans('user.message.success_signin',['email' => $request->email]),
+                config('common.flash_level_key') => config('common.flash_level.success'),
+            ];
+        } else {
+            $message = [
+                config('common.flash_notice') => trans('user.message.failed_signin'),
+                config('common.flash_level_key') => config('common.flash_level.danger'),
+            ];
+        }
+
+        return redirect()->route('home')->with($message);
+    }
+
+    public function getSignout(Request $request)
+    {
+        if (Auth::check()) {
+            Auth::logout();
+            $request->session()->flush();
+
+            return redirect()->route('home');
         }
     }
 }
