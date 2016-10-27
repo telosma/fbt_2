@@ -10,10 +10,12 @@
     </head>
     <body>
         @include('includes.userHeader')
-        <div class="wrraper">
-            @yield('content')            
+        <div class="container-fluid page-body">
+            @yield('content')
         </div>
-        @include('includes.userFooter')
+        <div class="container-fluid">
+            @include('includes.userFooter')
+        </div>
         {!! Html::script('js/jquery.min.js') !!}
         {!! Html::script('js/bootstrap.min.js') !!}
         @yield('script')

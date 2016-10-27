@@ -17,5 +17,6 @@ return [
         'success_via' => 'Login success via :provider',
         'error_login' => 'Login failed! Something went wrong!',
         'to_submit_review' => 'Login to submit review',
+        'null_tour' => 'No tour available now',
     ],
 ];
