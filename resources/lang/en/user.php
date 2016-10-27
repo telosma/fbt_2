@@ -11,5 +11,6 @@ return [
         'success_signin' => ':email Login successful',
         'error_signin' => 'Login failed',
         'auth_require' => 'Please login to do this action',
+        'success_signup' => 'Register successful',
     ],
 ];
