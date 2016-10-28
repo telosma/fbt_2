@@ -52,6 +52,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::get('list-only', ['uses' => 'CategoryController@ajaxListOnly', 'as' => 'admin.category.ajax.listOnly']);
         });
     });
+
+    Route::group(['prefix' => 'revenue'], function () {
+        Route::get('/', ['uses' => 'RevenueController@index', 'as' => 'admin.revenue.index']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'RevenueController@ajaxList', 'as' => 'admin.revenue.ajax.list']);
+            Route::post('create', ['uses' => 'RevenueController@ajaxCreate', 'as' => 'admin.revenue.ajax.create']);
+            Route::post('update', ['uses' => 'RevenueController@ajaxUpdate', 'as' => 'admin.revenue.ajax.update']);
+            Route::delete('delete', ['uses' => 'RevenueController@ajaxDelete', 'as' => 'admin.revenue.ajax.delete']);
+            Route::get('list-only', ['uses' => 'RevenueController@ajaxListOnly', 'as' => 'admin.revenue.ajax.listOnly']);
+        });
+    });
 });
 
 Route::match(['get', 'post'], 'upload/image/ckeditor', [

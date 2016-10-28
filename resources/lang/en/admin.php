@@ -9,6 +9,7 @@ return [
     'upload_response' => 'Upload :response!',
     'list' => 'List :name',
     'category' => 'category',
+    'revenue' => 'revenue',
     'update' => 'Update',
     'create' => 'Create',
     'save' => 'Save',
