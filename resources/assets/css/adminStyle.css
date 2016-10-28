@@ -28,7 +28,13 @@ table.dataTable thead th.sorting_desc:after {
     display: block;
     font-family: FontAwesome;
 }
-td {
+table.dataTable td {
     max-width: 100px;
     word-wrap:break-word;
+}
+#place_id .place-item {
+    position: relative;
+    float: left;
+    margin-right: 6px;
+    margin-top: 5px;
 }

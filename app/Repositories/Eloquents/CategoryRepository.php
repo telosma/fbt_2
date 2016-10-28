@@ -25,6 +25,14 @@ class CategoryRepository extends BaseRepository
         return $this;
     }
 
+    public function all()
+    {
+        $categories = parent::all();
+        $this->updateNullParent($categories['data']);
+
+        return $categories;
+    }
+
     protected function updateNullParent($categories)
     {
         $updateArray = [];

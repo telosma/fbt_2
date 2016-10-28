@@ -74,7 +74,7 @@ class CategoryController extends Controller
 
     public function ajaxListOnly()
     {
-        return $this->categoryRepository->get();
+        return $this->categoryRepository->all();
     }
 
     public function ajaxDelete(Request $request)

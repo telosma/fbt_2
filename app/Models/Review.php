@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\{User, Comment};
+use App\Models\{User, Comment, Tour};
 
 class Review extends Model
 {
@@ -22,5 +22,10 @@ class Review extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class, 'review_id');
+    }
+
+    public function tour()
+    {
+        return $this->belongsTo(Tour::class, 'tour_id');
     }
 }
