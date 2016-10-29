@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\{TourSchedule, Image, Rate, Place};
+use App\Models\{TourSchedule, Image, Rate, Place, Review};
 
 class Tour extends Model
 {
@@ -25,6 +25,11 @@ class Tour extends Model
     public function images()
     {
         return $this->hasMany(Image::class, 'tour_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'tour_id');
     }
 
     public function rates()

@@ -27,7 +27,7 @@ CKEDITOR.editorConfig = function (config) {
         'format,' +
         'horizontalrule,' +
         'htmlwriter,' +
-        'image,' +
+        'image2,' +
         'indentlist,' +
         'indentblock,' +
         'justify,' +
@@ -41,11 +41,7 @@ CKEDITOR.editorConfig = function (config) {
         'pastefromword,' +
         'pastetext,' +
         'preview,' +
-        'print,' +
         'removeformat,' +
-        'resize,' +
-        'save,' +
-        'selectall,' +
         'showblocks,' +
         'showborders,' +
         'smiley,' +

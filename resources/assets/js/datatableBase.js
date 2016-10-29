@@ -10,6 +10,10 @@ function datatableBase(option) {
     this.item;
     this.columns = [];
     this.table;
+    this.order = {
+        column: 1,
+        type: 'asc',
+    };
     this.request;
     this.lang = {
         'trans': {
@@ -203,7 +207,7 @@ function datatableBase(option) {
             'processing': true,
             'ajax': current.url.ajaxList,
             'columns': current.columns,
-            'order': [1, 'asc'],
+            'order': [current.order.column, current.order.type],
             select: {
                 style: 'multi',
                 selector: 'td:last-child'
@@ -244,6 +248,7 @@ function datatableBase(option) {
         $('#form_modal').submit(function () {
             current.request = $(this).serializeObject();
             var inputs = $(this).find('input, select, button, textarea');
+            inputs.parents('.form-group').removeClass('has-error');
             inputs.prop('disabled', true);
             SendRequest.send($(this).prop('action'), current.request, 'post', function (data) {
                 current.showMessage(data);
@@ -259,7 +264,6 @@ function datatableBase(option) {
         }
     };
     this.showFormCreate = function () {
-        this.loadCategory();
         $('#form_modal').prop('action', current.url.ajaxCreate);
         if (typeof this.item.showFormCreate === 'function') {
             this.item.showFormCreate();
@@ -274,7 +278,6 @@ function datatableBase(option) {
         var tr = $(thisRow).closest('tr');
         var row = current.table.row(tr);
         var rdata = row.data();
-        current.loadCategory();
         $('#form_modal').prop('action', current.url.ajaxUpdate);
         if (typeof this.item.showFormUpdate === 'function') {
             this.item.showFormUpdate(rdata);
@@ -291,21 +294,11 @@ function datatableBase(option) {
             data.responseJSON[current.lang.response.key_name]
         );
     };
-    this.loadCategory = function () {
-        SendRequest.send(current.url.ajaxList, current.request, 'get', function (response) {
-            if (response.status === 200) {
-                $('#parent_id').children(':nth-child(n+2)').remove();
-                $('#parent_id').append(drawCategoryList(response.responseJSON.data));
-            } else {
-                alert(current.lang.trans.load_categories_error + response.status);
-            }
-        });
-    };
     this.deleteById = function (id) {
         this.request = {id: id, _method: 'delete'};
         var r = confirm(current.lang.trans.confirm_delete);
         if (r) {
-            SendRequest.send(current.url.delete, current.request, 'post', current.showMessage);
+            SendRequest.send(current.url.ajaxDelete, current.request, 'post', current.showMessage);
             current.table.ajax.reload(null, false);
         }
     };

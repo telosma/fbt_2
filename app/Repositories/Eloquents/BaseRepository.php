@@ -161,7 +161,7 @@ abstract class BaseRepository implements RepositoryInterface
             if (is_array($ids)) {
                 $data = $this->model->destroy($ids);
             } else {
-                $data = $this->model->find($id)->delete();
+                $data = $this->model->find($ids)->delete();
             }
 
             if (!$data) {
