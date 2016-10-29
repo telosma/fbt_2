@@ -5,35 +5,35 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\Eloquents\CategoryRepository;
-use App\Http\Requests\CategoryUpdateRequest;
-use App\Http\Requests\CategoryRequest;
+use App\Repositories\Eloquents\PlaceRepository;
+use App\Http\Requests\PlaceUpdateRequest;
+use App\Http\Requests\PlaceRequest;
 
-class CategoryController extends Controller
+class PlaceController extends Controller
 {
-    protected $categoryRepository;
+    protected $placeRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(PlaceRepository $placeRepository)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->placeRepository = $placeRepository;
     }
 
     public function index()
     {
-        return view('admin.category.list');
+        return view('admin.place.list');
     }
 
     public function ajaxList()
     {
-        return $this->categoryRepository
+        return $this->placeRepository
             ->withToursCount()
             ->get();
     }
 
-    public function ajaxCreate(CategoryRequest $request)
+    public function ajaxCreate(PlaceRequest $request)
     {
-        $categoryRequest = $request->only(['name', 'parent_id']);
-        $response = $this->categoryRepository->create($categoryRequest);
+        $placeRequest = $request->only(['name']);
+        $response = $this->placeRepository->create($placeRequest);
         if ($response['status']) {
             return [
                 config('common.flash_level_key') => config('admin.noty_status.success'),
@@ -51,10 +51,10 @@ class CategoryController extends Controller
         ];
     }
 
-    public function ajaxUpdate(CategoryUpdateRequest $request)
+    public function ajaxUpdate(PlaceUpdateRequest $request)
     {
-        $categoryRequest = $request->only(['name', 'parent_id']);
-        $response = $this->categoryRepository->update($categoryRequest, $request->id);
+        $placeRequest = $request->only(['name']);
+        $response = $this->placeRepository->update($placeRequest, $request->id);
         if ($response['status']) {
             return [
                 config('common.flash_level_key') => config('admin.noty_status.success'),
@@ -74,12 +74,12 @@ class CategoryController extends Controller
 
     public function ajaxListOnly()
     {
-        return $this->categoryRepository->all();
+        return $this->placeRepository->get();
     }
 
     public function ajaxDelete(Request $request)
     {
-        $response = $this->categoryRepository->delete($request->id);
+        $response = $this->placeRepository->delete($request->id);
         if ($response['status']) {
             return [
                 config('common.flash_level_key') => config('admin.noty_status.success'),
