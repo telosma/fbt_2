@@ -10,6 +10,7 @@ return [
     'list' => 'List :name',
     'category' => 'category',
     'revenue' => 'revenue',
+    'place' => 'place',
     'update' => 'Update',
     'create' => 'Create',
     'save' => 'Save',
