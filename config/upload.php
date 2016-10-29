@@ -10,5 +10,6 @@ return [
             'oauth_token_secret' => env('UPLOAD_OAUTH_TOKEN_SECRET'),
         ],
         'host' => env('UPLOAD_HOST'),
+        'max_size' => 3456789,
     ],
 ];

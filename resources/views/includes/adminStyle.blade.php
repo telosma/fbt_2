@@ -16,3 +16,5 @@
 {!! Html::style('css/adminStyle.css') !!}
 <!-- Animate.css -->
 {!! Html::style('css/animate.min.css') !!}
+<!-- hover -->
+{!! Html::style('css/hover-min.css') !!}
