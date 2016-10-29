@@ -111,6 +111,9 @@ ul>li>a {
 .modal-content {
     min-width: 700px;
 }
+.auth-modal-content {
+    padding-bottom: 30px;
+}
 .social-login {
     cursor: pointer;
     display: inline-block;
@@ -125,8 +128,8 @@ ul>li>a {
 .social-login.gg{
     background-color: #d03a3c;
 }
-.social-login.tw {
-    background-color: #1dcaff;
+.social-login.gh {
+    background-color: #373737;
 }
 .social-login i {
     color: white;
@@ -137,6 +140,14 @@ ul>li>a {
     width: 50px;
     text-align: center;
     font-weight: 400;
+}
+.social-login span {
+    position: absolute;
+    padding-top: 14px!important;
+    color: white!important;
+}
+.modal-auth-body {
+    margin-bottom: 30px;
 }
 .heading {
     text-align: center;

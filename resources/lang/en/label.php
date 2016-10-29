@@ -9,7 +9,7 @@ return [
     'register' => 'Register',
     'login_with_fb' => 'Login With Facebook',
     'login_with_gg' => 'Login With Google',
-    'login_with_tw' => 'Login With Twitter',
+    'login_with_gh' => 'Login With Github',
     'normal_login' => 'Log in with your email address',
     'forgot_password' => 'Forgot your password',
     'question_has_account' => 'Do not have an account?',

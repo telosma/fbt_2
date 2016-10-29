@@ -61,4 +61,13 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    public function getAvatarLinkAttribute()
+    {
+        if (filter_var($this->attributes['avatar_link'], FILTER_VALIDATE_URL)) {
+            return $this->attributes['avatar_link'];
+        }
+
+        return asset(config('upload.default_folder_path') . $this->attributes['avatar_link']);
+    }
 }

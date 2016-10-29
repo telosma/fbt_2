@@ -12,5 +12,7 @@ return [
         'error_signin' => 'Login failed',
         'auth_require' => 'Please login to do this action',
         'success_signup' => 'Register successful',
+        'success_via' => 'Login success via :provider',
+        'error_login' => 'Login failed! Something went wrong!',
     ],
 ];
