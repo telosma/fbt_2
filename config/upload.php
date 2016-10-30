@@ -10,6 +10,9 @@ return [
             'oauth_token_secret' => env('UPLOAD_OAUTH_TOKEN_SECRET'),
         ],
         'host' => env('UPLOAD_HOST'),
+        'rest_link' => 'https://api.flickr.com/services/rest/',
         'max_size' => 3456789,
+        'max_with' => 320,
+        'max_with_array' => [100, 240, 320, 500, 640, 1024],
     ],
 ];
