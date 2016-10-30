@@ -42,6 +42,7 @@ Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallb
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
+
     Route::group(['prefix' => 'category'], function () {
         Route::get('/', ['uses' => 'CategoryController@index', 'as' => 'admin.category.index']);
         Route::group(['prefix' => 'ajax'], function () {
@@ -72,6 +73,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::post('update', ['uses' => 'PlaceController@ajaxUpdate', 'as' => 'admin.place.ajax.update']);
             Route::delete('delete', ['uses' => 'PlaceController@ajaxDelete', 'as' => 'admin.place.ajax.delete']);
             Route::get('list-only', ['uses' => 'PlaceController@ajaxListOnly', 'as' => 'admin.place.ajax.listOnly']);
+        });
+    });
+
+    Route::group(['prefix' => 'tour'], function () {
+        Route::get('/', ['uses' => 'TourController@index', 'as' => 'admin.category.index']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'TourController@ajaxList', 'as' => 'admin.tour.ajax.list']);
+            Route::get('show/{id}', ['uses' => 'TourController@ajaxShow', 'as' => 'admin.tour.ajax.show']);
+            Route::post('create', ['uses' => 'TourController@ajaxCreate', 'as' => 'admin.tour.ajax.create']);
+            Route::post('update', ['uses' => 'TourController@ajaxUpdate', 'as' => 'admin.tour.ajax.update']);
+            Route::delete('delete', ['uses' => 'TourController@ajaxDelete', 'as' => 'admin.tour.ajax.delete']);
         });
     });
 });
