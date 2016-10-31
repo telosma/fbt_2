@@ -48,10 +48,23 @@ class UploadController extends Controller
                 ],
             ]);
         }
+        $data = $this->storageImage($request);
+        $result = [
+            'message' => $data['message'],
+            'url' => '',
+        ];
+        if ($data['status']) {
+            $thumb = getThumb($data['url'], config('upload.image_upload.max_with'));
+            if ($thumb['status']) {
+                $result['url'] = $thumb['thumbnail'];
+            } else {
+                $result['url'] = $data['url'];
+            }
+        }
 
         return view('uploadCKEditor', [
             'CKEditorFuncNum' => $request->CKEditorFuncNum,
-            'data' => $this->storageImage($request),
+            'data' => $result,
         ]);
     }
 }
