@@ -134,8 +134,8 @@ abstract class BaseRepository implements RepositoryInterface
     public function update($params, $id)
     {
         try {
-            $data = $this->model->where('id', $id)->update($params);
-            if (!$data) {
+            $data = $this->model->find($id);
+            if (!$data->update($params)) {
                 return [
                     'status' => false,
                     'message' => trans('messages.db_update_error'),

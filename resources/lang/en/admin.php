@@ -11,9 +11,11 @@ return [
     'category' => 'category',
     'revenue' => 'revenue',
     'place' => 'place',
+    'tour' => 'tour',
     'update' => 'Update',
     'create' => 'Create',
     'save' => 'Save',
+    'add' => 'Add',
     'responses' => [
         'create' => 'Create :status!',
         'update' => 'Update :status!',
