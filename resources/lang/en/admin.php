@@ -12,6 +12,7 @@ return [
     'revenue' => 'revenue',
     'place' => 'place',
     'tour' => 'tour',
+    'review' => 'review',
     'update' => 'Update',
     'create' => 'Create',
     'save' => 'Save',

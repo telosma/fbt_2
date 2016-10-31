@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\{User, Comment, Tour};
 use Carbon\Carbon;
 use Html2Text\Html2Text;
+use Str;
 
 class Review extends Model
 {
@@ -18,7 +19,17 @@ class Review extends Model
         'rated_place',
         'rated_service',
     ];
-    protected $appends = ['text_preview'];
+    protected $appends = [
+        'text_preview',
+        'short_content',
+    ];
+
+    public function getShortContentAttribute()
+    {
+        $text = Html2Text::convert($this->attributes['content']);
+
+        return $this->attributes['short_content'] = Str::words($text, config('review.short_limit_word'));
+    }
 
     public function user()
     {
