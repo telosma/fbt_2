@@ -6,23 +6,23 @@
  * and open the template in the editor.
  */
 
-function getThumb($link, $with = 100)
+function getThumb($link, $length = 100)
 {
     $restLink = config('upload.image_upload.rest_link');
     $requests = [];
     $result = [
         'origin' => $link,
     ];
-    $maxWithArray = config('upload.image_upload.max_with_array');
-    $maxWithCount = count($maxWithArray);
-    for ($i = 0; $i < $maxWithCount - 1; $i++) {
-        $p = $with - $maxWithArray[$i];
-        $q = $maxWithArray[$i + 1] - $with;
+    $maxLengthArray = config('upload.image_upload.max_length_array');
+    $maxLengthCount = count($maxLengthArray);
+    for ($i = 0; $i < $maxLengthCount - 1; $i++) {
+        $p = $length - $maxLengthArray[$i];
+        $q = $maxLengthArray[$i + 1] - $length;
         if ($p >= 0 && $q >= 0) {
             if ($p < $q) {
-                $with = $maxWithArray[$i];
+                $length = $maxLengthArray[$i];
             } else {
-                $with = $maxWithArray[$i + 1];
+                $length = $maxLengthArray[$i + 1];
             }
             break;
         }
@@ -44,7 +44,7 @@ function getThumb($link, $with = 100)
     if ($responseObject['stat'] == 'ok') {
         $result['status'] = true;
         foreach ($responseObject['sizes']['size'] as $size) {
-            if ($size['width'] == $with) {
+            if ($size['width'] == $length || $size['height'] == $length) {
                 $result['thumbnail'] = $size['source'];
                 break;
             }

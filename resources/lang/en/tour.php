@@ -16,4 +16,5 @@ return [
     'write_num_day' => 'Write Tour duration...',
     'title_create' => 'Create new tour',
     'title_update' => 'Update tour',
+    'tour_not_exist' => 'Tour not exist!',
 ];
