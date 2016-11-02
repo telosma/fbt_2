@@ -303,6 +303,7 @@ a, a:hover {
 }
 .page-content {
     min-height: 500px;
+    background-color: #F7F8F9;
 }
 .page-content .content-section {
     margin-top: 150px;
@@ -351,6 +352,30 @@ a, a:hover {
 .danger-notification .text {
     background: rgb(255, 102, 102);
 }
+.warning-notification .icon {
+    background: rgb(255, 204, 0);
+}
+.warning-notification .text {
+    background: rgb(101, 153, 255);
+}
 /*
-    /Notification style
+* trick style
 */
+.bg-white {
+    background-color: #fff;
+}
+.cusor-pointer {
+    cursor: pointer;
+}
+.p20 {
+    padding: 20px;
+}
+.filled {
+    color: yellow;
+}
+.heart {
+   color: #d81814!important;
+}
+a {
+    outline: 0;
+}

@@ -15,7 +15,10 @@ Route::get('/', [
     'as' => 'home',
     'uses' => 'HomeController@getHome',
 ]);
-
+Route::get('tour/{id}', [
+    'uses' => 'TourController@show',
+    'as' => 'getTour',
+]);
 Route::post('signin', [
     'as' => 'signin',
     'uses' => 'AuthUserController@postSignin',

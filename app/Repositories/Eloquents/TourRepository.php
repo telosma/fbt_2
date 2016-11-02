@@ -116,6 +116,7 @@ class TourRepository extends BaseRepository
     {
         return $this->model
             ->with(['tourSchedules', 'places', 'category', 'images'])
+            ->withCount('reviews', 'rates')
             ->find($id);
     }
 }

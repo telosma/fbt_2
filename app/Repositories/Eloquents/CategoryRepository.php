@@ -18,7 +18,7 @@ class CategoryRepository extends BaseRepository
         return Category::class;
     }
 
-    public function WithToursCount()
+    public function withToursCount()
     {
         $this->model = $this->model->withCount('tours');
 

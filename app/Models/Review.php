@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\{User, Comment, Tour};
+use Carbon\Carbon;
 
 class Review extends Model
 {
@@ -27,5 +28,10 @@ class Review extends Model
     public function tour()
     {
         return $this->belongsTo(Tour::class, 'tour_id');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format(config('common.publish_date_format'));
     }
 }

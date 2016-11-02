@@ -23,8 +23,23 @@ return [
     'view_detail' => 'View more',
     'confirm_password' => 'Confirm Password',
     'copy_right' => '© 2016 BKT Team',
+    'all_review' => 'All Reviews',
+    'description' => 'Description',
+    'choose_schedule' => 'Choose schedule',
+    'destination' => 'Destinations',
+    'image_overview' => 'Images overview',
     'modal' => [
         'login_title' => 'Log into your account BKT!',
         'regiter_title' => 'Create new account BKT',
+    ],
+    'review' => [
+        'write_at' => 'Writed at :time',
+        'num_review' => ':num reviews',
+        'submit' => 'Submit review',
+        'descriptions' => 'Description',
+        'food' => 'Food',
+        'place' => 'Place',
+        'serivce' => 'Service',
+        'rate_from' => 'from :num',
     ],
 ];

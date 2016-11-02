@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default_folder_path' => 'images/default',
+    'default_folder_path' => 'images/default/',
     'image_upload' => [
         'auth' => [
             'api_key' => env('UPLOAD_API_KEY'),

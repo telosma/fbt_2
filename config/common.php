@@ -5,6 +5,8 @@ return [
     'flash_message' => 'flash_message',
     'flash_level_key' => 'flash_level_key',
     'default_avatar' => 'default_user.png',
+    'max_rate_point' => 5,
+    'publish_date_format' => 'l j F Y',
     'flash_level' => [
         'success' => 'success',
         'info' => 'info',
@@ -13,6 +15,8 @@ return [
     ],
     'limit' => [
         'page_limit' => 10,
+        'list_review' => 4,
+        'text_preview' => 100,
     ],
     'textarea' => [
         'rows' => 10,

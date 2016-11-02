@@ -1,0 +1,228 @@
+@extends('layouts.userMaster')
+
+@section('style')
+    {!! Html::style('css/userStyle.css') !!}
+    {!! Html::style('css/tourShow.css') !!}
+@endsection
+@section('content')
+    @include('includes.notification')
+    @include('includes.error')
+    <section class="page-content">
+        <div class="tour-banner">
+            <div class="detail-banner" style="background-image: url('{{
+                isset($tour->images[0]) ?
+                    $tour->images[0]->url :
+                    asset(config('upload.default_folder_path') . config('asset.default_tour'))
+            }}')">
+                <div class="container">
+                    <div class="detail-banner-left">
+                        <h2 class="detail-title">
+                            {{ $tour->name }}
+                        </h2>
+                        <div class="detail-banner-price">
+                            <span>
+                                <em class="sale-price">{{ $tour->price }}</em>
+                            </span>
+                        </div>
+                        <div class="detail-banner-rating">
+                            @include('includes.rating', ['point' => ceil($tour->rate_average)])
+                            @if ($tour->rates_count)
+                                <span class="detail-num-rating">
+                                    {{ trans('label.review.rate_from', ['num' => $tour->rates_count]) }}
+                                </span>
+                            @endif
+                        </div>
+                        <div class="detail-banner-btn write">
+                            <i class="fa fa-pencil"></i>
+                            <span data-toggle="a b c">{{ trans('user.action.write_review') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row detail-content">
+                <h2>{{ trans('label.destination') }}</h2>
+                <div class="col-sm-12">
+                    <div class="detail-banner-address bg-white p20">
+                        @foreach($tour->places as $key => $place)
+                            <i class="fa fa-map-marker"></i>
+                            {{ $place->name }}
+                            @if (($key+1) != count($tour->places))
+                                <i class="fa fa-long-arrow-right"></i>
+                            @endif
+                        @endforeach
+                    </div>
+                    <h2>{{ trans('label.image_overview') }}</h2>
+                </div>
+                <div class="col-sm-7">
+                    <div class="detail-gallery">
+                        <div class="row">
+                            <!-- Carousel -->
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    @foreach($tour->images as $key => $image)
+                                        @if ($key == 0)
+                                            <li data-target="#carousel-example-generic" data-slide-to="{{ $key }}" class="active"></li>
+                                        @else
+                                            <li data-target="#carousel-example-generic" data-slide-to="{{ $key }}"></li>
+                                        @endif
+                                    @endforeach
+                                </ol>
+                                <div class="carousel-inner">
+                                    @foreach($tour->images as $key => $image)
+                                        <div class="item{{ $key == 0 ? ' active' : '' }}">
+                                            <img src="{{ $image->url }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div><!-- /carousel -->
+                        </div>
+                    </div>
+                    <h2>{{ trans('label.all_review') }}</h2>
+                    <div class="reviews">
+                        @foreach ($reviews as $review)
+                            <div class="review">
+                                <div class="user-review-image cusor-pointer" data-toggle="tooltip" title="{{ $review->user->name }}">
+                                    <a href="#">
+                                        <img class="circle" src="{{ asset(config('asset.default_avatar')) }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="review-inner">
+                                    <div class="review-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>{{ trans('label.review.write_at', ['time' => $review->created_at]) }}</p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="review-total-like">
+                                                    {{ count($review->likes) }} <i class="fa fa-heart heart"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-wrapper-content">
+                                        <div class="review-content">
+                                            {!! str_limit($review->content, config('common.limit.text_preview')) !!}
+                                        </div>
+                                        <div class="review-rating">
+                                            <dl>
+                                                <dt>{{ trans('label.review.food') }}</dt>
+                                                <dd>
+                                                    @include('includes.rating', ['point' => $review->rated_food])
+                                                </dd>
+                                                <dt>{{ trans('label.review.place') }}</dt>
+                                                <dd>
+                                                    @include('includes.rating', ['point' => $review->rated_place])
+                                                </dd>
+                                                <dt>{{ trans('label.review.serivce') }}</dt>
+                                                <dd>
+                                                    @include('includes.rating', ['point' => $review->rated_service])
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div> <!-- /review-inner -->
+                            </div> <!-- /review -->
+                        @endforeach
+                        <span class="clear-fixed">{!! $reviews->links() !!}</span>
+                    </div> <!-- reviews -->
+                </div>
+                <div class="col-sm-5">
+                    <div class="bg-white p20">
+                        <div class="detail-overview-review">
+                            {{ trans('label.review.num_review', ['num' => $tour->reviews_count]) }}
+                        </div>
+                        <div class="detail-action row">
+                            <div class="col-sm-4">
+                                <div class="btn btn-book">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    {{ trans('label.choose_schedule') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>{{ trans('label.description') }}</h2>
+                    <div class="bg-white p20">
+                        <div class="detail-description">
+                            <p>
+                                {{ $tour->description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <h2>{{ trans('label.review.submit') }}</h2>
+                    {{ Form::open(['url' => '', 'method' => 'post', 'class' => 'bg-white p20 add-review']) }}
+                        <div class="row">
+                            <div class="form-group input-rating col-sm-3 col-sm-offset-2">
+                                <div class="rating-title">
+                                    {{ trans('label.review.food') }}
+                                </div>
+                                <span class="rating">
+                                    @foreach (range(config('common.max_rate_point'), 1) as $i)
+                                        {!! Form::radio('food', $i, false, [
+                                            'id' => 'rating-food-' . $i,
+                                            'class' => 'rating-input',
+                                        ]) !!}
+                                        {!! Form::label('rating-food-' . $i, ' ', ['class' => 'rating-star']) !!}
+                                    @endforeach
+                                </span>
+                            </div>
+                            <div class="form-group input-rating col-sm-3">
+                                <div class="rating-title">
+                                    {{ trans('label.review.place') }}
+                                </div>
+                                <span class="rating">
+                                    @foreach (range(config('common.max_rate_point'), 1) as $i)
+                                        {!! Form::radio('place', $i, false, [
+                                            'id' => 'rating-place-' . $i,
+                                            'class' => 'rating-input',
+                                        ]) !!}
+                                        {!! Form::label('rating-place-' . $i, ' ', ['class' => 'rating-star']) !!}
+                                    @endforeach
+                                </span>
+                            </div>
+                            <div class="form-group input-rating col-sm-3">
+                                <div class="rating-title">
+                                    {{ trans('label.review.serivce') }}
+                                </div>
+                                <span class="rating">
+                                    @foreach (range(config('common.max_rate_point'), 1) as $i)
+                                        {!! Form::radio('serivce', $i, false, [
+                                            'id' => 'rating-service-' . $i,
+                                            'class' => 'rating-input',
+                                        ]) !!}
+                                        {!! Form::label('rating-service-' . $i, ' ', ['class' => 'rating-star']) !!}
+                                    @endforeach
+                                </span>
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2">
+                                {!! Form::textarea('content', null, ['id' => 'rv-content']) !!}
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2">
+                                @if (Auth::check())
+                                    {!! Form::submit('Submit Review', ['class' => 'btn btn-info']) !!}
+                                @else
+                                    {{ trans('user.message.to_submit_review') }}
+                                @endif
+                            </div>
+                        </div>
+                    {{ Form::close() }}
+                </div>
+            </div>
+        </div>
+    </section>
+    @include('includes.modalAuth')
+@endsection
+@section('script')
+    {!! Html::script('js/userScript.js') !!}
+@endsection
