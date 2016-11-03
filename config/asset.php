@@ -7,4 +7,5 @@ return [
     'logo_fr' => 'images/default/logo-fr.png',
     'search_icon' => 'images/default/searchicon.png',
     'active_state' => 'images/default/active-state.png',
+    'default_tour' => 'tour.jpg',
 ];

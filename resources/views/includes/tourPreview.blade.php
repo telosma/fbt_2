@@ -1,18 +1,23 @@
-<div class="col-md-3 col-sm-6">
+<div class="col-md-6 col-sm-6" class="product-board">
     <div class="product-item">
-        <div class="item-thumb">
+        <div class="item-thumb" style="background-image: url({{
+            count($tourSchedule->tour->images) ?
+                $tourSchedule->tour->images[0]->url :
+                asset(config('upload.default_folder_path') . config('asset.default_tour'))
+        }})">
             <div class="overlay">
                 <div class="overlay-inner">
                     <a href="#" class="view-detail">{{ trans('label.view_detail') }}</a>
                 </div>
             </div> <!-- /.overlay -->
-            <img src="https://static.pexels.com/photos/191741/pexels-photo-191741-large.jpeg">
         </div> <!-- /.item-thumb -->
-        <h3>Tour name</h3>
+        <h3>{{ $tourSchedule->tour->name }}</h3>
         <span>
             {{ trans('label.price') }}
-            <em class="text-muted price">260.00</em>
-            <em class="price sale-price">180.00</em>
+            @if ($tourSchedule->tour->price != $tourSchedule->price)
+                <em class="text-muted price">{{ $tourSchedule->tour->price }}</em>
+            @endif
+            <em class="price sale-price">{{ $tourSchedule->price }}</em>
         </span>
     </div> <!-- /.product-item -->
 </div> <!-- /.col-md-3 -->
