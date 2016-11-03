@@ -118,6 +118,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::delete('delete', ['uses' => 'TourScheduleController@ajaxDelete', 'as' => 'admin.tourSchedule.ajax.delete']);
         });
     });
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', ['uses' => 'UserController@index', 'as' => 'admin.user.index']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'UserController@ajaxList', 'as' => 'admin.user.ajax.list']);
+            Route::post('create', ['uses' => 'UserController@ajaxCreate', 'as' => 'admin.user.ajax.create']);
+            Route::post('update', ['uses' => 'UserController@ajaxUpdate', 'as' => 'admin.user.ajax.update']);
+            Route::post('reset-pass', ['uses' => 'UserController@ajaxResetPass', 'as' => 'admin.user.ajax.resetPass']);
+            Route::delete('delete', ['uses' => 'UserController@ajaxDelete', 'as' => 'admin.user.ajax.delete']);
+        });
+    });
 });
 
 Route::match(['get', 'post'], 'upload/image/ckeditor', [

@@ -10,6 +10,7 @@ return [
         'book' => 'Book',
     ],
     'message' => [
+        'reset_password' => 'Reset password :status!',
         'success_signin' => ':email Login successful',
         'error_signin' => 'Login failed',
         'auth_require' => 'Please login to do this action',
@@ -22,4 +23,13 @@ return [
         'rate_required' => 'You have to rate for :object of review',
         'success_review' => 'Review successed',
     ],
+    'name' => 'Name',
+    'email' => 'Email',
+    'bookings' => 'Bookings',
+    'reviews' => 'Reviews',
+    'write_name' => 'Write name for user...',
+    'write_email' => 'Write email for user...',
+    'title_create' => 'Create new user',
+    'title_update' => 'Update user',
+    'reset_password' => 'Reset password',
 ];

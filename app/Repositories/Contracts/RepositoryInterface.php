@@ -19,4 +19,5 @@ interface RepositoryInterface
     public function withCount($relations);
     public function with($relations);
     public function remove();
+    public function select($columns = ['*']);
 }

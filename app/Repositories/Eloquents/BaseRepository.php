@@ -77,6 +77,13 @@ abstract class BaseRepository implements RepositoryInterface
         return $this;
     }
 
+    public function select($columns = ['*'])
+    {
+        $this->model = $this->model->select(is_array($columns) ? $columns : func_get_args());
+
+        return $this;
+    }
+
     public function get($columns = ['*'])
     {
         try {
