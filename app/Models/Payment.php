@@ -8,7 +8,7 @@ class Payment extends Model
 {
     protected $table = 'payments';
     protected $fillable = [
-        'booking_account_id',
-        'booking_id',
+        'bank_account_id',
+        'tour_id',
     ];
 }

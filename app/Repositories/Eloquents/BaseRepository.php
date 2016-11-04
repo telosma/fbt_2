@@ -137,6 +137,24 @@ abstract class BaseRepository implements RepositoryInterface
         }
     }
 
+    public function lists($column, $key = null)
+    {
+        try {
+            $data = $this->model->lists($column, $key);
+            $this->resetModel();
+
+            return [
+                'status' => true,
+                'data' => $data,
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => false,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
     public function create($params)
     {
         try {
