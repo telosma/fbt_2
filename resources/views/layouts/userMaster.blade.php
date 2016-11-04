@@ -5,7 +5,7 @@
         <title>@yield('page_title')</title>
         {!! Html::style('css/bootstrap.min.css') !!}
         {!! Html::style('css/font-awesome.min.css') !!}
-        {!! Html::style('css/main.css') !!}
+        {!! Html::style('css/userStyle.css') !!}
         @yield('style')
         @stack('header')
     </head>
@@ -19,6 +19,7 @@
         </div>
         {!! Html::script('js/jquery.min.js') !!}
         {!! Html::script('js/bootstrap.min.js') !!}
+        {!! Html::script('js/userScript.js') !!}
         @yield('script')
         @stack('scripts')
     </body>
