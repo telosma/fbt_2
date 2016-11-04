@@ -4,6 +4,11 @@
     {!! Html::style('css/userStyle.css') !!}
     {!! Html::style('css/tourShow.css') !!}
 @endsection
+
+@push('header')
+    @include('includes.CKeditorScript')
+@endpush
+
 @section('content')
     @include('includes.notification')
     @include('includes.error')
@@ -93,7 +98,7 @@
                             <div class="review">
                                 <div class="user-review-image cusor-pointer" data-toggle="tooltip" title="{{ $review->user->name }}">
                                     <a href="#">
-                                        <img class="circle" src="{{ asset(config('asset.default_avatar')) }}" alt="">
+                                        <img class="circle" src="{{ $review->user->avatar_link }}" alt="">
                                     </a>
                                 </div>
                                 <div class="review-inner">
@@ -111,7 +116,7 @@
                                     </div>
                                     <div class="review-wrapper-content">
                                         <div class="review-content">
-                                            {!! str_limit($review->content, config('common.limit.text_preview')) !!}
+                                            {!! str_limit($review->text_preview, config('common.limit.text_preview')) !!}
                                         </div>
                                         <div class="review-rating">
                                             <dl>
@@ -161,7 +166,7 @@
                 </div>
                 <div class="col-sm-12">
                     <h2>{{ trans('label.review.submit') }}</h2>
-                    {{ Form::open(['url' => '', 'method' => 'post', 'class' => 'bg-white p20 add-review']) }}
+                    {{ Form::open(['route' => 'postCreateReview', 'method' => 'post', 'class' => 'bg-white p20 add-review']) }}
                         <div class="row">
                             <div class="form-group input-rating col-sm-3 col-sm-offset-2">
                                 <div class="rating-title">
@@ -206,8 +211,13 @@
                                 </span>
                             </div>
                             <div class="col-sm-8 col-sm-offset-2">
-                                {!! Form::textarea('content', null, ['id' => 'rv-content']) !!}
+                                {!! Form::textarea('content', null, [
+                                    'id' => 'rv-content',
+                                    'rows' => config('common.textarea.rows'),
+                                    'cols' => config('common.textarea.cols'),
+                                ]) !!}
                             </div>
+                            {!! Form::hidden('tourId', $tour->id) !!}
                             <div class="col-sm-8 col-sm-offset-2">
                                 @if (Auth::check())
                                     {!! Form::submit('Submit Review', ['class' => 'btn btn-info']) !!}
@@ -225,4 +235,7 @@
 @endsection
 @section('script')
     {!! Html::script('js/userScript.js') !!}
+    <script type="text/javascript">
+        CKEDITOR.replace('rv-content');
+    </script>
 @endsection

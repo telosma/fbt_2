@@ -18,5 +18,8 @@ return [
         'error_login' => 'Login failed! Something went wrong!',
         'to_submit_review' => 'Login to submit review',
         'null_tour' => 'No tour available now',
+        'required_review_content' => 'Please fill out your review content',
+        'rate_required' => 'You have to rate for :object of review',
+        'success_review' => 'Review successed',
     ],
 ];

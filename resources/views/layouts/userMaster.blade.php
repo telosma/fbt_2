@@ -7,6 +7,7 @@
         {!! Html::style('css/font-awesome.min.css') !!}
         {!! Html::style('css/main.css') !!}
         @yield('style')
+        @stack('header')
     </head>
     <body>
         @include('includes.userHeader')
@@ -19,5 +20,6 @@
         {!! Html::script('js/jquery.min.js') !!}
         {!! Html::script('js/bootstrap.min.js') !!}
         @yield('script')
+        @stack('scripts')
     </body>
 </html>

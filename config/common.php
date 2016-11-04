@@ -17,6 +17,7 @@ return [
         'page_limit' => 10,
         'list_review' => 4,
         'text_preview' => 100,
+        'review_min' => 200,
     ],
     'textarea' => [
         'rows' => 10,

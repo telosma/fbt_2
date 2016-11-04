@@ -7,7 +7,7 @@
         }})">
             <div class="overlay">
                 <div class="overlay-inner">
-                    <a href="#" class="view-detail">{{ trans('label.view_detail') }}</a>
+                    <a href="{{ route('getTour', $tourSchedule->tour->id) }}" class="view-detail">{{ trans('label.view_detail') }}</a>
                 </div>
             </div> <!-- /.overlay -->
         </div> <!-- /.item-thumb -->
