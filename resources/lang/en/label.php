@@ -46,6 +46,7 @@ return [
     'subject' => 'Subject',
     'message' => 'Message',
     'contact' => 'Contact us',
+    'like' => 'Like',
     'modal' => [
         'login_title' => 'Log into your account BKT!',
         'regiter_title' => 'Create new account BKT',

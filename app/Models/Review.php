@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\{User, Comment, Tour};
+use App\Models\{User, Comment, Tour, Like};
 use Carbon\Carbon;
 use Html2Text\Html2Text;
 use Str;
@@ -44,6 +44,11 @@ class Review extends Model
     public function tour()
     {
         return $this->belongsTo(Tour::class, 'tour_id');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'review_id');
     }
 
     public function getCreatedAtAttribute($value)
