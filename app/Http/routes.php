@@ -29,6 +29,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as' => 'signout',
         'uses' => 'AuthUserController@getSignout',
     ]);
+    Route::post('tour', [
+        'as' => 'postCreateReview',
+        'uses' => 'ReviewController@postCreate',
+    ]);
 });
 
 Route::post('signup', [
