@@ -93,6 +93,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::delete('delete', ['uses' => 'TourController@ajaxDelete', 'as' => 'admin.tour.ajax.delete']);
         });
     });
+
+    Route::group(['prefix' => 'review'], function () {
+        Route::get('/', ['uses' => 'ReviewController@index', 'as' => 'admin.review.index']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'ReviewController@ajaxList', 'as' => 'admin.review.ajax.list']);
+            Route::delete('delete', ['uses' => 'ReviewController@ajaxDelete', 'as' => 'admin.review.ajax.delete']);
+        });
+    });
 });
 
 Route::match(['get', 'post'], 'upload/image/ckeditor', [

@@ -55,10 +55,32 @@ abstract class BaseRepository implements RepositoryInterface
         }
     }
 
-    public function get()
+    public function with($relations)
+    {
+        if (is_string($relations)) {
+            $relations = func_get_args();
+        }
+
+        $this->model = $this->model->with($relations);
+
+        return $this;
+    }
+
+    public function withCount($relations)
+    {
+        if (is_string($relations)) {
+            $relations = func_get_args();
+        }
+
+        $this->model = $this->model->withCount($relations);
+
+        return $this;
+    }
+
+    public function get($columns = ['*'])
     {
         try {
-            $data = $this->model->get();
+            $data = $this->model->get($columns);
             $this->resetModel();
 
             return [
@@ -215,5 +237,17 @@ abstract class BaseRepository implements RepositoryInterface
         $this->model = $this->model->orWhere($column, $operator, $value);
 
         return $this;
+    }
+
+    public function whereIn($column, $values, $boolean = 'and', $not = false)
+    {
+        $this->model = $this->model->whereIn($column, $values, $boolean, $not);
+
+        return $this;
+    }
+
+    public function remove()
+    {
+        return $this->model->delete();
     }
 }
