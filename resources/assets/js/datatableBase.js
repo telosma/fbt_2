@@ -252,7 +252,11 @@ function datatableBase(option) {
             inputs.prop('disabled', true);
             SendRequest.send($(this).prop('action'), current.request, 'post', function (data) {
                 current.showMessage(data);
-                $('#myModal').modal('hide');
+                if (typeof current.item.complete === 'function') {
+                    current.item.complete();
+                } else {
+                    $('#myModal').modal('hide');
+                }
             });
             current.table.ajax.reload(null, false);
             inputs.prop('disabled', false);

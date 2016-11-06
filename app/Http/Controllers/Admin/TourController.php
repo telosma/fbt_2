@@ -62,6 +62,16 @@ class TourController extends Controller
         ];
     }
 
+    public function ajaxShowWithSchedule($id)
+    {
+        $data = $this->tourRepository->showWithSchedule($id);
+        if ($data['status']) {
+            return $data['data'];
+        }
+
+        return [];
+    }
+
     public function ajaxCreate(TourRequest $request)
     {
         $tourRequest = $request->only([
@@ -139,7 +149,7 @@ class TourController extends Controller
 
     public function ajaxListOnly()
     {
-        return $this->tourRepository->get();
+        return $this->tourRepository->lists('name', 'id');
     }
 
     public function ajaxDelete(Request $request)

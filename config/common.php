@@ -28,4 +28,5 @@ return [
         'google' => 'google',
         'github' => 'github',
     ],
+    'schedule_date_format' => 'd-m-Y',
 ];

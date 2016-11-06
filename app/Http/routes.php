@@ -88,6 +88,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
         Route::group(['prefix' => 'ajax'], function () {
             Route::get('list', ['uses' => 'TourController@ajaxList', 'as' => 'admin.tour.ajax.list']);
             Route::get('show/{id}', ['uses' => 'TourController@ajaxShow', 'as' => 'admin.tour.ajax.show']);
+            Route::get('show-with-schedule/{id}', [
+                'uses' => 'TourController@ajaxShowWithSchedule',
+                'as' => 'admin.tour.ajax.ajaxShowWithSchedule'
+            ]);
+            Route::get('list-only', ['uses' => 'TourController@ajaxListOnly', 'as' => 'admin.tour.ajax.listOnly']);
             Route::post('create', ['uses' => 'TourController@ajaxCreate', 'as' => 'admin.tour.ajax.create']);
             Route::post('update', ['uses' => 'TourController@ajaxUpdate', 'as' => 'admin.tour.ajax.update']);
             Route::delete('delete', ['uses' => 'TourController@ajaxDelete', 'as' => 'admin.tour.ajax.delete']);
@@ -101,6 +106,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
         Route::group(['prefix' => 'ajax'], function () {
             Route::get('list', ['uses' => 'ReviewController@ajaxList', 'as' => 'admin.review.ajax.list']);
             Route::delete('delete', ['uses' => 'ReviewController@ajaxDelete', 'as' => 'admin.review.ajax.delete']);
+        });
+    });
+
+    Route::group(['prefix' => 'tour-schedule'], function () {
+        Route::get('/', ['uses' => 'TourScheduleController@index', 'as' => 'admin.tourSchedule.index']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'TourScheduleController@ajaxList', 'as' => 'admin.tourSchedule.ajax.list']);
+            Route::post('create', ['uses' => 'TourScheduleController@ajaxCreate', 'as' => 'admin.tourSchedule.ajax.create']);
+            Route::post('update', ['uses' => 'TourScheduleController@ajaxUpdate', 'as' => 'admin.tourSchedule.ajax.update']);
+            Route::delete('delete', ['uses' => 'TourScheduleController@ajaxDelete', 'as' => 'admin.tourSchedule.ajax.delete']);
         });
     });
 });

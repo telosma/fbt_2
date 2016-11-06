@@ -173,4 +173,20 @@ class TourRepository extends BaseRepository
             ->with('images')
             ->find($id)['data'];
     }
+
+    public function showWithSchedule($id)
+    {
+        return $this
+            ->select(['id', 'category_id', 'price', 'name', 'num_day'])
+            ->with([
+                'tourSchedules' => function ($query) {
+                    $query->with('revenue')->orderBy('start', 'desc');
+                },
+                'places' => function ($query) {
+                },
+                'category' => function ($query) {
+                },
+            ])
+            ->find($id);
+    }
 }
