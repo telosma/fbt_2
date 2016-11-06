@@ -23,6 +23,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tfoot>
@@ -34,6 +35,7 @@
             <th>{!! trans('tour.num_day') !!}</th>
             <th>{!! trans('tour.rate') !!}</th>
             <th>{!! trans('tour.num_reviews') !!}</th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -147,10 +149,37 @@
         </div>
     </div>
 </div>
+<!-- Modal edit image-->
+<div class="modal fade" id="image-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="image-modal-title"></h4>
+                <!--end modal-header-->
+            </div>
+            <div class="modal-body">
+                {!! Form::open(['class' => 'form-horizontal', 'method' => 'post', 'id' => 'image_form']) !!}
+                    {!! Form::hidden('id', null) !!}
+                    <div id="images-content"></div>
+                    <div class="form-group">
+                        <div class="col-md-3 col-md-offset-9">
+                            {!! Form::submit(trans('admin.save'), ['class' => 'btn btn-primary']) !!}
+                        </div>
+                    </div>
+                {!! Form::close() !!}
+                <!--end modal-body-->
+            </div>
+            <!--end modal-content-->
+        </div>
+    </div>
+</div>
 @endsection
 
 @include('includes.ajaxSendRequest')
 @include('includes.datatableBase')
+@include('includes.uploadMultipleFile')
 
 @push('scripts')
 {!! Html::script('js/adminTour.js') !!}
@@ -165,14 +194,21 @@
                 'ajaxDelete': '{!! route('admin.tour.ajax.delete') !!}',
                 'ajaxListCategory': '{!! route('admin.category.ajax.listOnly') !!}',
                 'ajaxListPlaces': '{!! route('admin.place.ajax.listOnly') !!}',
+                'ajaxUpdateImages': '{!! route('admin.tour.ajax.updateImage') !!}',
+                'ajaxShowImage': '{!! asset('admin/tour/ajax/images') !!}',
             },
             lang: {
                 'trans': {
                     'title_create': '{!! trans('tour.title_create') !!}',
                     'title_update': '{!! trans('tour.title_update') !!}',
                 },
+                'response': {
+                    'key_name': '{!! config('common.flash_level_key') !!}',
+                    'message_name': '{!! config('common.flash_message') !!}',
+                },
             }
         });
+        UploadMultipleFile.draw($('#images-content'));
     });
 </script>
 @endpush

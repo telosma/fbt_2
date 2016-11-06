@@ -144,6 +144,7 @@ function uploadMultipleFile(option) {
         $.each(current.filesUploaded, function (i, item) {
             if (
                 typeof item !== 'undefined'
+                && item.file !== null
                 && item.file.name === newFile.name
                 && item.file.size === newFile.size
             ) {
@@ -318,7 +319,12 @@ function uploadMultipleFile(option) {
                 switch (data.status) {
                     case 200:
                         current.fileProcess.url = data.responseJSON.url;
-                        current.addStatus('success');
+
+                        if (data.responseJSON.status) {
+                            current.addStatus('success');
+                        } else {
+                            current.addStatus('error');
+                        }
                         break;
                     case 401:
                         if (confirm(current.lang.comfirm_login)) {

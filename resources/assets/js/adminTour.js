@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* global SendRequest, DatatableBase, CKEDITOR */
+/* global SendRequest, DatatableBase, CKEDITOR, UploadMultipleFile */
 
 function tour(option) {
     var current = this;
@@ -37,15 +37,21 @@ function tour(option) {
             'title_create': 'Create new tour',
             'title_update': 'Update tour',
         },
+        'response': {
+            'key_name': 'key',
+            'message_name': 'message',
+        }
     };
     this.url = {
         'ajaxShow': '',
+        'ajaxShowImage': '',
         'ajaxList': '',
         'ajaxCreate': '',
         'ajaxUpdate': '',
         'ajaxDelete': '',
         'ajaxListCategory': '',
         'ajaxListPlaces': '',
+        'ajaxUpdateImages': '',
     };
     this.columns = [
         {
@@ -64,6 +70,12 @@ function tour(option) {
         {'data': 'num_day'},
         {'data': 'rate_average'},
         {'data': 'reviews_count'},
+        {
+            'orderable': false,
+            'searchable': false,
+            'className': 'show-images center',
+            'defaultContent': '<i class="fa fa-picture-o" aria-hidden="true"></i>'
+        },
     ];
     this.buttons = [];
     this.setUrl = function (url) {
@@ -111,6 +123,45 @@ function tour(option) {
         $('#place_id').on('click', '.delete-place', function () {
             current.removePlace(this);
         });
+        //Images
+        $('#table tbody').on('click', 'td.show-images', function () {
+            var tr = $(this).closest('tr');
+            var data = DatatableBase.table.row(tr).data();
+            current.showFormUploadImage(data.id);
+        });
+        $('#image_form').submit(function () {
+            var request = {
+                'id': $(this).children('input[name=id]').val(),
+                'images': UploadMultipleFile.getUploaded(),
+            };
+            $(this).find('input').prop('disable', true);
+            SendRequest.send(current.url.ajaxUpdateImages, request, 'post', function (data) {
+                message(
+                    data.responseJSON[current.lang.response.message_name],
+                    data.responseJSON[current.lang.response.key_name]
+                );
+                $('#image-modal').modal('hide');
+            });
+            $(this).find('input').prop('disable', false);
+            return false;
+        });
+    };
+    this.showFormUploadImage = function (tourId) {
+        var data;
+        var images = [];
+        var i = 0;
+        SendRequest.send(current.url.ajaxShowImage + '/' + tourId, null, 'get', function (response) {
+            data = response.responseJSON;
+        });
+        $.each(data.images, function (j,  image) {
+            images[i] = image.url;
+            i++;
+        });
+        UploadMultipleFile.removeAll();
+        $('#image_form').children('input[name=id]').val(data.id);
+        UploadMultipleFile.addImage(images);
+        $('#image-modal-title').html(data.name);
+        $('#image-modal').modal('show');
     };
     this.loadTour = function (tourId) {
         var data = null;

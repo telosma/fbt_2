@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : hoanghoi
 */
 
-.has-chil, .delete, .edit {
+.has-chil, .delete, .edit, .show-images {
     color: blueviolet;
     cursor: pointer;
 }

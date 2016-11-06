@@ -91,6 +91,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::post('create', ['uses' => 'TourController@ajaxCreate', 'as' => 'admin.tour.ajax.create']);
             Route::post('update', ['uses' => 'TourController@ajaxUpdate', 'as' => 'admin.tour.ajax.update']);
             Route::delete('delete', ['uses' => 'TourController@ajaxDelete', 'as' => 'admin.tour.ajax.delete']);
+            Route::post('update-image', ['uses' => 'TourController@ajaxUpdateImage', 'as' => 'admin.tour.ajax.updateImage']);
+            Route::get('images/{id}', ['uses' => 'TourController@ajaxShowImage', 'as' => 'admin.tour.ajax.showImage']);
         });
     });
 

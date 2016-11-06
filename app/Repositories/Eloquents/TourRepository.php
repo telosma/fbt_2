@@ -3,16 +3,24 @@
 namespace App\Repositories\Eloquents;
 
 use App\Models\Tour;
-use App\Models\Place;
+use App\Repositories\Eloquents\PlaceRepository;
+use App\Repositories\Eloquents\ImageRepository;
 use DB;
 
 class TourRepository extends BaseRepository
 {
+    protected $placeRepository;
+    protected $imageRepository;
 
-    public function __construct(Tour $tour)
-    {
+    public function __construct(
+        Tour $tour,
+        PlaceRepository $placeRepository,
+        ImageRepository $imageRepository
+    ) {
         parent::__construct();
         $this->model = $tour;
+        $this->placeRepository = $placeRepository;
+        $this->imageRepository = $imageRepository;
     }
 
     public function model()
@@ -20,31 +28,69 @@ class TourRepository extends BaseRepository
         return Tour::class;
     }
 
-    public function create($param, $places)
+    public function create($param)
     {
-        $tourCreate = parent::create($param);
+        $tourCreate = parent::create($param['tour']);
         if ($tourCreate['status']) {
-            $placesArray = [];
-            foreach ($places as $place) {
-                if (Place::find($place)) {
-                    $placesArray[] = $place;
+            $places = [];
+            foreach ($param['places'] as $placeId) {
+                if ($this->placeRepository->find($placeId)['status']) {
+                    $places[] = $placeId;
                 }
             }
-            $tourCreate['data']->places()->attach($placesArray);
+            $tourCreate['data']->places()->attach($places);
         }
 
         return $tourCreate;
     }
 
-    public function update($param, $id, $places)
+    public function updateImage($id, $images)
     {
-        $tourUpdate = parent::update($param, $id);
+        try {
+            $tour = $this->find($id)['data'];
+            $imageCreated = 0;
+            if (!$tour) {
+                throw new \Exception(trans('tour.tour_not_exist'));
+            }
+
+            $tour->images()->delete();
+            if (!empty($images)) {
+                foreach ($images as $image) {
+                    $headers = get_headers($image);
+                    if(strpos($headers[0], '200') !== false)
+                    {
+                        $imageCreate = $this->imageRepository->create([
+                            'tour_id' => $tour->id,
+                            'url' => $image
+                        ]);
+                        if ($imageCreate['status']) {
+                            $imageCreated++;
+                        }
+                    }
+                }
+            }
+
+            return [
+                'status' => true,
+                'data' => $imageCreated,
+            ];
+        } catch (\Exception $ex) {
+            return [
+                'status' => false,
+                'message' => $ex->getMessage(),
+            ];
+        }
+    }
+
+    public function update($param, $id)
+    {
+        $tourUpdate = parent::update($param['tour'], $id);
         if ($tourUpdate['status']) {
             $tourUpdate['data']->places()->detach();
-            $placesArray = [];
-            foreach ($places as $place) {
-                if (Place::find($place)) {
-                    $placesArray[] = $place;
+            $places = [];
+            foreach ($param['places'] as $placeId) {
+                if ($this->placeRepository->find($placeId)['status']) {
+                    $places[] = $placeId;
                 }
             }
             $tourUpdate['data']->places()->attach($places);
@@ -58,16 +104,16 @@ class TourRepository extends BaseRepository
         try {
             DB::beginTransaction();
             if (is_array($ids)) {
-                $tours = $this->model->whereIn('id', $ids);
-                foreach ($tours->get() as $tour) {
+                $tours = $this->whereIn('id', $ids);
+                foreach ($tours->get()['data'] as $tour) {
                     $tour->places()->detach();
                     $tour->images()->delete();
                     $tour->reviews()->delete();
                     $tour->rates()->delete();
                 }
-                $data = $tours->delete();
+                $data = $tours->remove();
             } else {
-                $tour = $this->model->find($ids);
+                $tour = $this->find($ids)['data'];
                 $tour->places()->detach();
                 $tour->images()->delete();
                 $tour->reviews()->delete();
@@ -97,7 +143,7 @@ class TourRepository extends BaseRepository
 
     public function showAll()
     {
-        $this->model = $this->model
+        return $this
             ->select([
                 'id',
                 'name',
@@ -105,18 +151,26 @@ class TourRepository extends BaseRepository
                 'category_id',
                 'num_day',
                 'rate_average',
+                'description',
             ])
             ->withCount('reviews')
-            ->with(['places', 'category']);
-
-        return $this;
+            ->with(['places', 'category'])
+            ->get();
     }
 
     public function show($id)
     {
-        return $this->model
+        return $this
             ->with(['tourSchedules', 'places', 'category', 'images'])
             ->withCount('reviews', 'rates')
-            ->find($id);
+            ->find($id)['data'];
+    }
+
+    public function showImage($id)
+    {
+        return $this
+            ->select(['id', 'name'])
+            ->with('images')
+            ->find($id)['data'];
     }
 }

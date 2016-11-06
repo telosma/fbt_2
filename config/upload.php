@@ -11,8 +11,8 @@ return [
         ],
         'host' => env('UPLOAD_HOST'),
         'rest_link' => 'https://api.flickr.com/services/rest/',
-        'max_size' => 3456789,
+        'max_size' => 2345678,
         'max_with' => 320,
-        'max_with_array' => [100, 240, 320, 500, 640, 1024],
+        'max_length_array' => [100, 240, 320, 500, 640, 1024],
     ],
 ];
