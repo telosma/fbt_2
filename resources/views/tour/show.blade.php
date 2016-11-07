@@ -1,7 +1,6 @@
 @extends('layouts.userMaster')
 
 @section('style')
-    {!! Html::style('css/userStyle.css') !!}
     {!! Html::style('css/tourShow.css') !!}
 @endsection
 
@@ -234,7 +233,6 @@
     @include('includes.modalAuth')
 @endsection
 @section('script')
-    {!! Html::script('js/userScript.js') !!}
     <script type="text/javascript">
         CKEDITOR.replace('rv-content');
     </script>

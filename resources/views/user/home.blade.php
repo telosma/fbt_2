@@ -32,9 +32,5 @@
                 </div> <!-- /.row -->
             </div>
         </div>
-        @include('includes.modalAuth')
     </div>
-@endsection
-@section('script')
-    {!! Html::script('js/userScript.js') !!}
 @endsection
