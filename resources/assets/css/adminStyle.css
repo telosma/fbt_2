@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : hoanghoi
 */
 
-.has-chil, .delete, .edit, .show-images {
+.has-chil, .delete, .edit, .modal-edit, .modal-delete {
     color: blueviolet;
     cursor: pointer;
 }
@@ -37,4 +37,12 @@ table.dataTable td {
     float: left;
     margin-right: 6px;
     margin-top: 5px;
+}
+.tour-option {
+    margin-top: 30px;
+}
+.label-option:after {
+    position: absolute;
+    content: ':';
+    right: 2px;
 }

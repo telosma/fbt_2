@@ -13,6 +13,7 @@ return [
     'place' => 'place',
     'tour' => 'tour',
     'review' => 'review',
+    'tour_schedule' => 'tour schedule',
     'update' => 'Update',
     'create' => 'Create',
     'save' => 'Save',
