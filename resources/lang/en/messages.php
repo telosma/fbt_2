@@ -7,4 +7,7 @@ return [
     'db_null' => 'Not available data',
     'db_update_error' => 'Failed to update',
     'not_found' => ':item not found!',
+    'new_contact' => 'You have new email form customer of BKT',
+    'customer_email' => 'Form customer email address: :email',
+    'customer_phone' => 'Customer phone number: :phone',
 ];

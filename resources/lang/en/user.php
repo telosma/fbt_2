@@ -11,6 +11,7 @@ return [
         'book' => 'Book',
         'cancel' => 'Cacncel',
         'checkout' => 'Checkout',
+        'send_mail' => 'Send email',
     ],
     'message' => [
         'reset_password' => 'Reset password :status!',
@@ -37,6 +38,8 @@ return [
         'success_payment_but' => 'Successful payment but data update error. Please contact admin',
         'success_payment' => 'Successful payment',
         'user_paid_bill' => ':name paid for booking id :id',
+        'success_review' => 'Review successed',
+        'success_contact' => 'Mail was sent',
     ],
     'name' => 'Name',
     'email' => 'Email',

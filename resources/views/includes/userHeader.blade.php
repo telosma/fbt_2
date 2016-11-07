@@ -20,6 +20,11 @@
                     {!! Form::submit(trans('label.search'), ['class' => 'btn btn-info']) !!}
                 {!! Form::close() !!}
             </li>
+            <li>
+                <a data-toggle="modal" data-target="#contact-form">
+                    {{ trans('label.contact') }}
+                </a>
+            </li>
             @if (Auth::check())
                 <li>
                     <div class="dropdown-toggle dropdown-user header-option" data-toggle="dropdown">
@@ -47,4 +52,7 @@
         </ul>
     </div>
 </nav>
-@include('includes.modalAuth')
+@if (!Auth::check())
+    @include('includes.modalAuth')
+@endif
+@include('includes.modalContact')

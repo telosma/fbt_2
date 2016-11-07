@@ -49,6 +49,7 @@ Route::get('auth/{provider}', [
 ]);
 
 Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
+Route::post('contact', ['uses' => 'HomeController@postContact', 'as' => 'postContact']);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('booking-cart', [

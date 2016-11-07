@@ -42,6 +42,10 @@ return [
     'expiration_year' => 'Expiration year',
     'close' => 'Close',
     'select_account' => 'Select account',
+    'your_phone' => 'Your phone number',
+    'subject' => 'Subject',
+    'message' => 'Message',
+    'contact' => 'Contact us',
     'modal' => [
         'login_title' => 'Log into your account BKT!',
         'regiter_title' => 'Create new account BKT',

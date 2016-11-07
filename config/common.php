@@ -5,6 +5,7 @@ return [
     'flash_message' => 'flash_message',
     'flash_level_key' => 'flash_level_key',
     'default_avatar' => 'default_user.png',
+    'email_admin' => 'luuvu304@gmail.com',
     'max_rate_point' => 5,
     'publish_date_format' => 'l j F Y',
     'flash_level' => [
