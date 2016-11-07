@@ -129,6 +129,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::delete('delete', ['uses' => 'UserController@ajaxDelete', 'as' => 'admin.user.ajax.delete']);
         });
     });
+
+    Route::group(['prefix' => 'booking'], function () {
+        Route::get('/', ['uses' => 'BookingController@index', 'as' => 'admin.booking.index']);
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('list', ['uses' => 'BookingController@ajaxList', 'as' => 'admin.booking.ajax.list']);
+            Route::delete('delete', ['uses' => 'BookingController@ajaxDelete', 'as' => 'admin.booking.ajax.delete']);
+            Route::post('reject', ['uses' => 'BookingController@ajaxReject', 'as' => 'admin.booking.ajax.reject']);
+        });
+    });
 });
 
 Route::match(['get', 'post'], 'upload/image/ckeditor', [

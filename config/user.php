@@ -11,4 +11,9 @@ return [
         'google_user' => 3,
         'github_user' => 4,
     ],
+    'booking' => [
+        'new' => 0,
+        'paid' => 1,
+        'rejected' => 2,
+    ],
 ];

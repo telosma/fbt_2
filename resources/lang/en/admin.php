@@ -12,6 +12,7 @@ return [
     'revenue' => 'revenue',
     'place' => 'place',
     'tour' => 'tour',
+    'booking' => 'booking',
     'review' => 'review',
     'tour_schedule' => 'tour schedule',
     'user' => 'user',
@@ -23,6 +24,7 @@ return [
         'create' => 'Create :status!',
         'update' => 'Update :status!',
         'delete' => 'Delete :status!',
+        'reject' => 'Reject :status!',
     ],
     'status' => [
         'success' => 'success',
