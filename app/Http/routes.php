@@ -66,74 +66,80 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
+    Route::get('login', ['uses' => 'AdminController@getLogin', 'as' => 'admin.getLogin']);
+    Route::post('login', ['uses' => 'AdminController@postLogin', 'as' => 'admin.postLogin']);
+    Route::get('logout', ['uses' => 'AdminController@logout', 'as' => 'admin.logout']);
 
-    Route::group(['prefix' => 'category'], function () {
-        Route::get('/', ['uses' => 'CategoryController@index', 'as' => 'admin.category.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'CategoryController@ajaxList', 'as' => 'admin.category.ajax.list']);
-            Route::post('create', ['uses' => 'CategoryController@ajaxCreate', 'as' => 'admin.category.ajax.create']);
-            Route::post('update', ['uses' => 'CategoryController@ajaxUpdate', 'as' => 'admin.category.ajax.update']);
-            Route::delete('delete', ['uses' => 'CategoryController@ajaxDelete', 'as' => 'admin.category.ajax.delete']);
-            Route::get('list-only', ['uses' => 'CategoryController@ajaxListOnly', 'as' => 'admin.category.ajax.listOnly']);
+    Route::group(['middleware' => 'admin'], function() {
+        Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
+
+        Route::group(['prefix' => 'category'], function () {
+            Route::get('/', ['uses' => 'CategoryController@index', 'as' => 'admin.category.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'CategoryController@ajaxList', 'as' => 'admin.category.ajax.list']);
+                Route::post('create', ['uses' => 'CategoryController@ajaxCreate', 'as' => 'admin.category.ajax.create']);
+                Route::post('update', ['uses' => 'CategoryController@ajaxUpdate', 'as' => 'admin.category.ajax.update']);
+                Route::delete('delete', ['uses' => 'CategoryController@ajaxDelete', 'as' => 'admin.category.ajax.delete']);
+                Route::get('list-only', ['uses' => 'CategoryController@ajaxListOnly', 'as' => 'admin.category.ajax.listOnly']);
+            });
         });
-    });
 
-    Route::group(['prefix' => 'revenue'], function () {
-        Route::get('/', ['uses' => 'RevenueController@index', 'as' => 'admin.revenue.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'RevenueController@ajaxList', 'as' => 'admin.revenue.ajax.list']);
-            Route::post('create', ['uses' => 'RevenueController@ajaxCreate', 'as' => 'admin.revenue.ajax.create']);
-            Route::post('update', ['uses' => 'RevenueController@ajaxUpdate', 'as' => 'admin.revenue.ajax.update']);
-            Route::delete('delete', ['uses' => 'RevenueController@ajaxDelete', 'as' => 'admin.revenue.ajax.delete']);
-            Route::get('list-only', ['uses' => 'RevenueController@ajaxListOnly', 'as' => 'admin.revenue.ajax.listOnly']);
+        Route::group(['prefix' => 'revenue'], function () {
+            Route::get('/', ['uses' => 'RevenueController@index', 'as' => 'admin.revenue.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'RevenueController@ajaxList', 'as' => 'admin.revenue.ajax.list']);
+                Route::post('create', ['uses' => 'RevenueController@ajaxCreate', 'as' => 'admin.revenue.ajax.create']);
+                Route::post('update', ['uses' => 'RevenueController@ajaxUpdate', 'as' => 'admin.revenue.ajax.update']);
+                Route::delete('delete', ['uses' => 'RevenueController@ajaxDelete', 'as' => 'admin.revenue.ajax.delete']);
+                Route::get('list-only', ['uses' => 'RevenueController@ajaxListOnly', 'as' => 'admin.revenue.ajax.listOnly']);
+            });
         });
-    });
 
-    Route::group(['prefix' => 'place'], function () {
-        Route::get('/', ['uses' => 'PlaceController@index', 'as' => 'admin.place.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'PlaceController@ajaxList', 'as' => 'admin.place.ajax.list']);
-            Route::post('create', ['uses' => 'PlaceController@ajaxCreate', 'as' => 'admin.place.ajax.create']);
-            Route::post('update', ['uses' => 'PlaceController@ajaxUpdate', 'as' => 'admin.place.ajax.update']);
-            Route::delete('delete', ['uses' => 'PlaceController@ajaxDelete', 'as' => 'admin.place.ajax.delete']);
-            Route::get('list-only', ['uses' => 'PlaceController@ajaxListOnly', 'as' => 'admin.place.ajax.listOnly']);
+        Route::group(['prefix' => 'place'], function () {
+            Route::get('/', ['uses' => 'PlaceController@index', 'as' => 'admin.place.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'PlaceController@ajaxList', 'as' => 'admin.place.ajax.list']);
+                Route::post('create', ['uses' => 'PlaceController@ajaxCreate', 'as' => 'admin.place.ajax.create']);
+                Route::post('update', ['uses' => 'PlaceController@ajaxUpdate', 'as' => 'admin.place.ajax.update']);
+                Route::delete('delete', ['uses' => 'PlaceController@ajaxDelete', 'as' => 'admin.place.ajax.delete']);
+                Route::get('list-only', ['uses' => 'PlaceController@ajaxListOnly', 'as' => 'admin.place.ajax.listOnly']);
+            });
         });
-    });
 
-    Route::group(['prefix' => 'tour'], function () {
-        Route::get('/', ['uses' => 'TourController@index', 'as' => 'admin.category.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'TourController@ajaxList', 'as' => 'admin.tour.ajax.list']);
-            Route::get('show/{id}', ['uses' => 'TourController@ajaxShow', 'as' => 'admin.tour.ajax.show']);
-            Route::get('show-with-schedule/{id}', [
-                'uses' => 'TourController@ajaxShowWithSchedule',
-                'as' => 'admin.tour.ajax.ajaxShowWithSchedule'
-            ]);
-            Route::get('list-only', ['uses' => 'TourController@ajaxListOnly', 'as' => 'admin.tour.ajax.listOnly']);
-            Route::post('create', ['uses' => 'TourController@ajaxCreate', 'as' => 'admin.tour.ajax.create']);
-            Route::post('update', ['uses' => 'TourController@ajaxUpdate', 'as' => 'admin.tour.ajax.update']);
-            Route::delete('delete', ['uses' => 'TourController@ajaxDelete', 'as' => 'admin.tour.ajax.delete']);
-            Route::post('update-image', ['uses' => 'TourController@ajaxUpdateImage', 'as' => 'admin.tour.ajax.updateImage']);
-            Route::get('images/{id}', ['uses' => 'TourController@ajaxShowImage', 'as' => 'admin.tour.ajax.showImage']);
+        Route::group(['prefix' => 'tour'], function () {
+            Route::get('/', ['uses' => 'TourController@index', 'as' => 'admin.tour.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'TourController@ajaxList', 'as' => 'admin.tour.ajax.list']);
+                Route::get('show/{id}', ['uses' => 'TourController@ajaxShow', 'as' => 'admin.tour.ajax.show']);
+                Route::get('show-with-schedule/{id}', [
+                    'uses' => 'TourController@ajaxShowWithSchedule',
+                    'as' => 'admin.tour.ajax.ajaxShowWithSchedule'
+                ]);
+                Route::get('list-only', ['uses' => 'TourController@ajaxListOnly', 'as' => 'admin.tour.ajax.listOnly']);
+                Route::post('create', ['uses' => 'TourController@ajaxCreate', 'as' => 'admin.tour.ajax.create']);
+                Route::post('update', ['uses' => 'TourController@ajaxUpdate', 'as' => 'admin.tour.ajax.update']);
+                Route::delete('delete', ['uses' => 'TourController@ajaxDelete', 'as' => 'admin.tour.ajax.delete']);
+                Route::post('update-image', ['uses' => 'TourController@ajaxUpdateImage', 'as' => 'admin.tour.ajax.updateImage']);
+                Route::get('images/{id}', ['uses' => 'TourController@ajaxShowImage', 'as' => 'admin.tour.ajax.showImage']);
+            });
         });
-    });
 
-    Route::group(['prefix' => 'review'], function () {
-        Route::get('/', ['uses' => 'ReviewController@index', 'as' => 'admin.review.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'ReviewController@ajaxList', 'as' => 'admin.review.ajax.list']);
-            Route::delete('delete', ['uses' => 'ReviewController@ajaxDelete', 'as' => 'admin.review.ajax.delete']);
+        Route::group(['prefix' => 'review'], function () {
+            Route::get('/', ['uses' => 'ReviewController@index', 'as' => 'admin.review.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'ReviewController@ajaxList', 'as' => 'admin.review.ajax.list']);
+                Route::delete('delete', ['uses' => 'ReviewController@ajaxDelete', 'as' => 'admin.review.ajax.delete']);
+            });
         });
-    });
 
-    Route::group(['prefix' => 'tour-schedule'], function () {
-        Route::get('/', ['uses' => 'TourScheduleController@index', 'as' => 'admin.tourSchedule.index']);
-        Route::group(['prefix' => 'ajax'], function () {
-            Route::get('list', ['uses' => 'TourScheduleController@ajaxList', 'as' => 'admin.tourSchedule.ajax.list']);
-            Route::post('create', ['uses' => 'TourScheduleController@ajaxCreate', 'as' => 'admin.tourSchedule.ajax.create']);
-            Route::post('update', ['uses' => 'TourScheduleController@ajaxUpdate', 'as' => 'admin.tourSchedule.ajax.update']);
-            Route::delete('delete', ['uses' => 'TourScheduleController@ajaxDelete', 'as' => 'admin.tourSchedule.ajax.delete']);
+        Route::group(['prefix' => 'tour-schedule'], function () {
+            Route::get('/', ['uses' => 'TourScheduleController@index', 'as' => 'admin.tourSchedule.index']);
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('list', ['uses' => 'TourScheduleController@ajaxList', 'as' => 'admin.tourSchedule.ajax.list']);
+                Route::post('create', ['uses' => 'TourScheduleController@ajaxCreate', 'as' => 'admin.tourSchedule.ajax.create']);
+                Route::post('update', ['uses' => 'TourScheduleController@ajaxUpdate', 'as' => 'admin.tourSchedule.ajax.update']);
+                Route::delete('delete', ['uses' => 'TourScheduleController@ajaxDelete', 'as' => 'admin.tourSchedule.ajax.delete']);
+            });
         });
     });
 
