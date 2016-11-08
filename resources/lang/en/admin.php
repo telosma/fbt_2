@@ -9,6 +9,8 @@ return [
     'password' => 'Password',
     'submit' => 'Submit',
     'home' => 'Home',
+    'monthly_revenue' => 'Monthly Revenue',
+    'annual_turnover' => 'Annual turnover',
     'read_all_message' => 'Read All Messages',
     'upload_response' => 'Upload :response!',
     'list' => 'List :name',

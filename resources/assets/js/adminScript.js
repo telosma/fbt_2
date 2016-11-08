@@ -62,3 +62,18 @@ String.prototype.trunc = function (n, useWordBoundary) {
     s_ = (useWordBoundary && isTooLong) ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
     return isTooLong ? s_ + '&hellip;' : s_;
 };
+var randomScalingFactor = function () {
+    return Math.round(Math.random() * 100);
+};
+var randomColorFactor = function () {
+    return Math.round(Math.random() * 255);
+};
+var randomColor = function () {
+    return 'rgba('
+        + randomColorFactor()
+        + ','
+        + randomColorFactor()
+        + ','
+        + randomColorFactor()
+        + ', 0.7)';
+};

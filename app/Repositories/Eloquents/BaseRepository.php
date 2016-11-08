@@ -282,4 +282,11 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $this;
     }
+
+    public function whereBetween($column, array $values, $boolean = 'and', $not = false)
+    {
+        $this->model = $this->model->whereBetween($column, $values, $boolean, $not);
+
+        return $this;
+    }
 }

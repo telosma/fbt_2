@@ -48,6 +48,5 @@ table.dataTable td {
 }
 .body-title {
     color: #008340;
-    border-bottom: 1px dashed #008340;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }

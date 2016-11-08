@@ -9,4 +9,6 @@ return [
         'information' => 'information',
         'success' => 'success',
     ],
+    'max_month_in_char' => 12,
+    'max_year_in_char' => 10,
 ];
