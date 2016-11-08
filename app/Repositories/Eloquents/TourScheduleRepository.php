@@ -30,18 +30,17 @@ class TourScheduleRepository extends BaseRepository
 
     public function getNewestTours()
     {
-        $today = Carbon::today();
+        $nextDay = Carbon::now()->addDays(5)->toDateString();
 
-        return $this->model
+        return $this
             ->with([
                 'tour' => function($query) {
-                    $query->with('images');
+                    $query->distinct()->with('images');
             }])
-            ->whereDate('start', '>', $today)
-            ->groupBy('tour_id')
+            ->where('start', $nextDay, '>')
             ->orderBy('start')
             ->limit(config('limit.tour_index'))
-            ->get();
+            ->get()['data'];
     }
 
     public function showAll()
