@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Repositories\Eloquents\{CategoryRepository, TourScheduleRepository, TourRepository};
+use App\Http\Requests\ContactRequest;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -101,5 +103,27 @@ class HomeController extends Controller
             config('common.flash_notice') => trans('user.message.fail'),
             config('common.flash_level_key') => config('common.flash_level.danger'),
         ]);
+    }
+
+    public function postContact(ContactRequest $request)
+    {
+        $contact = $request->all();
+        try {
+            Mail::send('emails.contact', $contact, function($message) use ($contact) {
+                $message->from($contact['email']);
+                $message->to(config('common.email_admin'));
+                $message->subject($contact['subject']);
+            });
+
+            return redirect()->back()->with([
+                config('common.flash_notice') => trans('user.message.success_contact'),
+                config('common.flash_level_key') => config('common.flash_level.success'),
+            ]);
+        } catch (Exception $e) {
+            return redirect()->back()->with([
+                config('common.flash_notice') => trans('user.message.fail'),
+                config('common.flash_level_key') => config('common.flash_level.danger'),
+            ]);
+        }
     }
 }
