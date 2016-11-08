@@ -28,6 +28,7 @@ return [
     'choose_schedule' => 'Choose schedule',
     'destination' => 'Destinations',
     'image_overview' => 'Images overview',
+    'top_rate' => 'Top Rate',
     'modal' => [
         'login_title' => 'Log into your account BKT!',
         'regiter_title' => 'Create new account BKT',

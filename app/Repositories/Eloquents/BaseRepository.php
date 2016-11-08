@@ -103,7 +103,7 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     public function first()
-    {   
+    {
         try {
             $data = $this->model->first();
             $this->resetModel();
@@ -233,7 +233,7 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     public function where($column, $value, $operator = '=')
-    {   
+    {
         $this->model = $this->model->where($column, $operator, $value);
 
         return $this;
@@ -256,5 +256,12 @@ abstract class BaseRepository implements RepositoryInterface
     public function remove()
     {
         return $this->model->delete();
+    }
+
+    public function limit($value)
+    {
+        $this->model = $this->model->limit($value);
+
+        return $this;
     }
 }

@@ -20,4 +20,5 @@ interface RepositoryInterface
     public function with($relations);
     public function remove();
     public function select($columns = ['*']);
+    public function limit($value);
 }

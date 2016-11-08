@@ -306,3 +306,16 @@ span .price:before {
 .detail-content {
     margin-bottom: 40px;
 }
+/*
+    Tour top
+*/
+.tour-top .box-tour-top .top-name{
+    font-family: serif;
+    font-size: 1.56em;
+}
+.single-box-tour {
+    margin: auto 10px;
+    margin-bottom: 40px;
+    background-color: #a7adaf;
+    border-radius: 5px;
+}

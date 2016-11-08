@@ -11,25 +11,19 @@
             <ul class="nav nav-pills nav-stacked" id="tour-menu">
                 {!! $tourMenu !!}
             </ul>
-            @include('includes.tourTop')
         </div>
-        <div class="page-content col-sm-8">
+        <div class="page-content col-sm-6">
             <div id="products" class="content-section">
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <h1 class="section-title">{{ trans('label.our_tours') }}</h1>
                     </div> <!-- /.col-md-12 -->
-                    @if (count($tourSchedules))
-                        @foreach ($tourSchedules as $tourSchedule)
-                            @include('includes.tourPreview')
-                        @endforeach
-                    @else
-                        <div class="alert alert-warning">
-                            {{ trans('user.message.null_tour') }}
-                        </div>
-                    @endif
+                    @include('includes.tourList')
                 </div> <!-- /.row -->
             </div>
+        </div>
+        <div class="top-right col-sm-3">
+            @include('includes.tourTop')
         </div>
     </div>
 @endsection

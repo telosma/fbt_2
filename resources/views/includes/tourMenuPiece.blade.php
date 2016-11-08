@@ -1,5 +1,5 @@
 <li {!! $category['id'] == $categoryCurrentId ? 'class="active"' : '' !!}>
-    <a href="#">
+    <a href="{{ route('getTourByCategory', $category['id']) }}">
         {!! $category['name'] !!}
         <span class="badge">{!! $tourCountTree !!}</span>
         @if ($children)
