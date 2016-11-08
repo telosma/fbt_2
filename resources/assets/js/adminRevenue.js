@@ -25,8 +25,8 @@ function revenue(option) {
         'ajaxListOnly': '',
     };
     this.columns = [
-        {'data': 'name'},
-        {'data': 'tours_count'},
+        {'data': 'value'},
+        {'data': 'tour_schedules_count'},
     ];
     this.buttons = [];
     this.setUrl = function (url) {
@@ -64,7 +64,7 @@ function revenue(option) {
     };
     this.showFormUpdate = function (rData) {
         $('input[name=id]').val(rData.id);
-        $('#value').val(rData.name);
+        $('input[name=value]').val(rData.value);
     };
     this.init(option);
 
