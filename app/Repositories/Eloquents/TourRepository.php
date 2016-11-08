@@ -189,4 +189,20 @@ class TourRepository extends BaseRepository
             ])
             ->find($id);
     }
+
+    public function getByCategory($categoryId)
+    {
+        return $this
+            ->where('category_id', $categoryId)
+            ->with('images')
+            ->paginate(config('common.limit.page_limit'));
+    }
+
+    public function limitTopRate($limit)
+    {
+        return $this
+            ->orderBy('rate_average', 'desc')
+            ->limit($limit)
+            ->get();
+    }
 }

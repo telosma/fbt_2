@@ -39,7 +39,10 @@ Route::post('signup', [
     'as' => 'signup',
     'uses' => 'AuthUserController@postSignup',
 ]);
-
+Route::get('category/{id}/tours', [
+    'as' => 'getTourByCategory',
+    'uses' => 'HomeController@getTourByCategory',
+]);
 Route::get('auth/{provider}', [
     'as' => 'redirectToProvider',
     'uses' => 'AuthSocialController@redirectToProvider'

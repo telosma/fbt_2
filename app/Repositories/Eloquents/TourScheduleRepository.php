@@ -16,8 +16,7 @@ class TourScheduleRepository extends BaseRepository
         TourSchedule $tourSchedule,
         TourRepository $tourRepository,
         RevenueRepository $revenueRepository
-    )
-    {
+    ) {
         parent::__construct();
         $this->model = $tourSchedule;
         $this->tourRepository = $tourRepository;

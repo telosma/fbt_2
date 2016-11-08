@@ -4,19 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Repositories\Eloquents\{CategoryRepository, TourScheduleRepository};
+use App\Repositories\Eloquents\{CategoryRepository, TourScheduleRepository, TourRepository};
 
 class HomeController extends Controller
 {
     private $categories;
     protected $categoryRepository;
     protected $tourScheduleRepository;
+    protected $tourRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, TourScheduleRepository $tourScheduleRepository)
-    {
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        TourScheduleRepository $tourScheduleRepository,
+        TourRepository $tourRepository
+    ) {
         $this->tourScheduleRepository = $tourScheduleRepository;
         $this->categoryRepository = $categoryRepository;
         $this->categories = $this->categoryRepository->withToursCount()->get()['data'];
+        $this->tourRepository = $tourRepository;
     }
 
     public function tourMenu($categoryCurrentId)
@@ -60,9 +65,41 @@ class HomeController extends Controller
 
     public function getHome()
     {
-        return view('user.home', [
+        $topTours = $this->tourRepository->limitTopRate(config('limit.tour_top'));
+        $tourSchedules = $this->tourScheduleRepository->getNewestTours();
+        if ($topTours['status'] && $tourSchedules )
+        {
+            return view('user.home', [
+                'tourMenu' => $this->tourMenu(null),
+                'tourSchedules' => $tourSchedules,
+                'topTours' => $topTours['data'],
+            ]);
+        }
+
+        return view('user.home')->with([
             'tourMenu' => $this->tourMenu(null),
-            'tourSchedules' => $this->tourScheduleRepository->getNewestTours(),
+            'tourSchedules' => null,
+            'topTours' => null,
+            config('common.flash_notice') => trans('user.message.fail'),
+            config('common.flash_level_key') => config('common.flash_level.danger'),
+        ]);
+    }
+
+    public function getTourByCategory($id)
+    {
+        $tours = $this->tourRepository->getByCategory($id);
+        $topTours = $this->tourRepository->limitTopRate(config('limit.tour_top'));
+        if ($tours && $topTours['data']) {
+            return view('tour.list', [
+                'tourMenu' => $this->tourMenu($id),
+                'tours' => $tours,
+                'topTours' => $topTours['data'],
+            ]);
+        }
+
+        return redirect('/')->with([
+            config('common.flash_notice') => trans('user.message.fail'),
+            config('common.flash_level_key') => config('common.flash_level.danger'),
         ]);
     }
 }
