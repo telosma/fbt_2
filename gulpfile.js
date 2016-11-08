@@ -36,6 +36,8 @@ gulp.task("copyfiles", function () {
         ['vendor/bower_dl/blueimp-file-upload/js/jquery.iframe-transport.js', publicDest[0]],
         ['vendor/bower_dl/blueimp-file-upload/js/jquery.fileupload.js', publicDest[0]],
         ['vendor/bower_dl/noty/js/noty/packaged/jquery.noty.packaged.min.js', publicDest[0]],
+        ['vendor/bower_dl/chart.js/dist/Chart.min.js', publicDest[0]],
+        ['vendor/bower_dl/chart.js/dist/Chart.bundle.min.js', publicDest[0]],
         //cssCopyPath
         ['vendor/bower_dl/metisMenu/dist/metisMenu.min.css', publicDest[1]],
         ['vendor/bower_dl/bootstrap/dist/css/bootstrap.min.css', publicDest[1]],
