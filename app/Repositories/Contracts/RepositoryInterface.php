@@ -23,4 +23,5 @@ interface RepositoryInterface
     public function select($columns = ['*']);
     public function limit($value);
     public function whereBetween($column, array $values, $boolean = 'and', $not = false);
+    public function whereRaw($sql, array $bindings = [], $boolean = 'and');
 }

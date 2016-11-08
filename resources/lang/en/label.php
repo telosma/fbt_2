@@ -50,6 +50,7 @@ return [
     'modal' => [
         'login_title' => 'Log into your account BKT!',
         'regiter_title' => 'Create new account BKT',
+        'booking_title' => 'Book our tour to find your real life',
     ],
     'review' => [
         'write_at' => 'Writed at :time',

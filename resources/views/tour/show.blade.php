@@ -147,7 +147,7 @@
                         </div>
                         <div class="detail-action row">
                             <div class="col-sm-4">
-                                <div class="btn btn-book">
+                                <div class="btn btn-book" data-toggle="modal" data-target="#booking-modal">
                                     <i class="fa fa-shopping-cart"></i>
                                     {{ trans('label.choose_schedule') }}
                                 </div>
@@ -165,7 +165,10 @@
                 </div>
                 <div class="col-sm-12">
                     <h2>{{ trans('label.review.submit') }}</h2>
-                    {{ Form::open(['route' => 'postCreateReview', 'method' => 'post', 'class' => 'bg-white p20 add-review']) }}
+                    {{ Form::open(['route' => 'postCreateReview',
+                        'method' => 'post',
+                        'class' => 'bg-white p20 add-review'
+                    ]) }}
                         <div class="row">
                             <div class="form-group input-rating col-sm-3 col-sm-offset-2">
                                 <div class="rating-title">
@@ -231,8 +234,17 @@
         </div>
     </section>
     @include('includes.modalAuth')
+    @include('includes.modalBooking')
 @endsection
 @section('script')
+    <script type="text/javascript">
+        var messages = {
+            to: '{{ trans('user.message.to') }}',
+            from: '{{ trans('user.message.from') }}',
+            available_slot: '{{ trans('user.message.available_slot') }}'
+        }
+    </script>
+    {{ Html::script('js/ajaxBooking.js') }}
     <script type="text/javascript">
         CKEDITOR.replace('rv-content');
     </script>

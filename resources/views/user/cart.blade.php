@@ -24,6 +24,7 @@
                     @foreach ($bookings as $booking)
                         <tr id ="item-request-{{ $booking->id }}">
                             <td>
+                            {{-- {{ dd($booking->tourSchedule->price) }} --}}
                                 <a href="{{ route('getTour', $booking->tourSchedule->tour->id) }}">
                                     {{ $booking->tourSchedule->tour->name }}
                                 </a>

@@ -54,6 +54,10 @@ Route::get('review/{id}', [
     'as' => 'review.show',
     'uses' => 'ReviewController@show',
 ]);
+Route::post('ajax/tour', [
+    'as' => 'ajaxGetSchedules',
+    'uses' => 'TourController@postAjaxSchedules',
+]);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('booking-cart', [
@@ -67,6 +71,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::post('/booking-cart', [
         'uses' => 'UserController@postCheckout',
         'as' => 'user.checkout',
+    ]);
+    Route::post('/book/tour', [
+        'as' => 'postBookTour',
+        'uses' => 'UserController@postBookTour',
     ]);
 });
 
