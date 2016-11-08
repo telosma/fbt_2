@@ -25,8 +25,8 @@ class RevenueUpdateRequest extends Request
     public function rules()
     {
         return [
-            'id' => 'exists:revenues,id',
-            'value' => 'required|unique:revenues,value,' . $this->id,
+            'id' => 'required|exists:revenues,id',
+            'value' => 'required|integer|min:0|unique:revenues,value,' . $this->id,
         ];
     }
 }

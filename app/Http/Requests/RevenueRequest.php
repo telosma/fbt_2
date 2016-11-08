@@ -24,7 +24,7 @@ class RevenueRequest extends Request
     public function rules()
     {
         return [
-            'value' => 'required|unique:revenues,value',
+            'value' => 'required|integer|min:0|unique:revenues,value',
         ];
     }
 }
