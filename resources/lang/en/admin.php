@@ -14,6 +14,7 @@ return [
     'tour' => 'tour',
     'review' => 'review',
     'tour_schedule' => 'tour schedule',
+    'user' => 'user',
     'update' => 'Update',
     'create' => 'Create',
     'save' => 'Save',

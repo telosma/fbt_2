@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\{Review, Comment, BankAccount, SocialUser};
+use App\Models\{Review, Comment, BankAccount, SocialUser, Booking};
 use Hash;
 
 class User extends Authenticatable
@@ -35,6 +35,11 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class, 'user_id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'user_id');
     }
 
     public function comments()
