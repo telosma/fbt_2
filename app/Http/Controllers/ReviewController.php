@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReviewCreateRequest;
-use App\Repositories\Eloquents\{ReviewRepository, TourRepository};
+use App\Repositories\Eloquents\{ReviewRepository, TourRepository, CommentRepository};
 use Auth;
 
 class ReviewController extends Controller
 {
     protected $reviewRepository;
+    protected $tourRepository;
+    protected $commentRepository;
     protected $userId = null;
 
-    public function __construct(ReviewRepository $reviewRepository, TourRepository $tourRepository)
-    {
+    public function __construct(
+        ReviewRepository $reviewRepository,
+        TourRepository $tourRepository,
+        CommentRepository $commentRepository
+    ) {
         $this->reviewRepository = $reviewRepository;
         $this->tourRepository = $tourRepository;
+        $this->commentRepository = $commentRepository;
         if (Auth::check()) {
             $this->userId = Auth::user()->id;
         }
@@ -51,5 +57,28 @@ class ReviewController extends Controller
         }
 
         return redirect()->back()->with($message);
+    }
+
+    public function show($id)
+    {
+        $review = $this->reviewRepository
+            ->with('user', 'tour')
+            ->withCount('likes')
+            ->find($id);
+        $comments = $this->commentRepository
+            ->where('review_id', $id)
+            ->with('user')
+            ->paginate(config('common.limit.page_limit'));
+        if($review['status'] && $comments) {
+            return view('review.show')->with([
+                'review' => $review['data'],
+                'comments' => $comments,
+            ]);
+        }
+
+        return redirect('/')->with([
+            config('common.flash_notice') => trans('user.message.error_get_review'),
+            config('common.flash_level_key') => config('common.flash_level.danger'),
+        ]);
     }
 }

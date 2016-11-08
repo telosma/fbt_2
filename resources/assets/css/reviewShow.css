@@ -1,0 +1,87 @@
+.review-show {
+    margin-right: 40px;
+    margin-bottom: 30px;
+}
+.review-show .rv-content {
+    margin-top: 50px;
+    font-family: serif;
+    font-size: 1.3478em;
+    word-wrap: break-word;
+}
+.bottom-50 {
+    margin-bottom: 50px!important;
+}
+.bottom-20 {
+    margin-bottom: 20px!important;
+    border-bottom: 1px solid black!important;
+}
+.border-bottom {
+    border-bottom: 1px solid gray;
+}
+.num-like {
+    margin-left: 30px;
+}
+.like-banner {
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.item-comment .submit-edit-comment, .cancel-edit-comment {
+    margin: auto 40px;
+}
+.item-comment-content {
+    margin: auto;
+    clear: both;
+    font-size: 16px;
+    font-family: serif;
+    margin-bottom: 10px;
+    line-height: 1.3em;
+    word-wrap: break-word;
+}
+.item-comment-content i {
+    display: none;
+}
+.item-comment-content .dropdown {
+    display: inline-flex;
+}
+.item-comment-content:hover > .dropdown i {
+    display: inline;
+    color: #000000;
+}
+.item-comment-content .dropdown-menu button {
+    background: inherit;
+    border: none;
+    margin-left: 10px;
+}
+.item-comment-content .dropdown-menu button:hover {
+    color: blue;
+}
+.item-comment-content .dropdown-menu li {
+    list-style: none;
+}
+.item-comment .media-body {
+    padding-top: 20px;
+}
+.user-review-info {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    padding: 15px 30px;
+    border-radius: 4px;
+    box-shadow: 0px 23px 30px -20px rgba(0,0,0,0.4);
+    transition: all 200ms ease-in-out;
+}
+.user-review-info:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 27px 30px -20px rgba(0,0,0,0.4);
+}
+.user-review-info .name {
+    color: rgba(0,0,0,0.4);
+    font-size: 24px;
+    margin-left: 20px;
+}
+.hover:hover {
+    cursor: pointer;
+    color: #31b0D5;
+}

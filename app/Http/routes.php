@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function() {
         'as' => 'postCreateReview',
         'uses' => 'ReviewController@postCreate',
     ]);
+    Route::resource('comments', 'CommentController');
 });
 
 Route::post('signup', [
@@ -47,9 +48,12 @@ Route::get('auth/{provider}', [
     'as' => 'redirectToProvider',
     'uses' => 'AuthSocialController@redirectToProvider'
 ]);
-
 Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
 Route::post('contact', ['uses' => 'HomeController@postContact', 'as' => 'postContact']);
+Route::get('review/{id}', [
+    'as' => 'review.show',
+    'uses' => 'ReviewController@show',
+]);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('booking-cart', [
