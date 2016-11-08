@@ -8,4 +8,9 @@ $(document).ready(function() {
             $('.notification').delay(1000).fadeOut();
         }
     });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });

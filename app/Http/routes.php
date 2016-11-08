@@ -50,6 +50,21 @@ Route::get('auth/{provider}', [
 
 Route::get('auth/{provider}/callback', 'AuthSocialController@handleProviderCallback');
 
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+    Route::get('booking-cart', [
+        'uses' => 'UserController@getBooking',
+        'as' => 'user.booking.index',
+    ]);
+    Route::post('/cancel-booking', [
+        'as' => 'postCancelBooking',
+        'uses' => 'UserController@postCancelBooking',
+    ]);
+    Route::post('/booking-cart', [
+        'uses' => 'UserController@postCheckout',
+        'as' => 'user.checkout',
+    ]);
+});
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
 

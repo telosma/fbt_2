@@ -71,4 +71,16 @@ class BookingRepository extends BaseRepository
             ];
         }
     }
+
+    public function getByUserId($userId)
+    {
+        return $this
+            ->where('user_id', $userId)
+            ->with(['tourSchedule' => function($query) {
+                $query->with(['tour']);
+            }])
+            ->orderBy('status')
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('common.limit.page_limit'));
+    }
 }

@@ -8,6 +8,7 @@ interface RepositoryInterface
     public function get($columns = ['*']);
     public function first();
     public function find($id);
+    public function lists($column, $key = null);
     public function create($params);
     public function update($params, $id);
     public function delete($ids);
