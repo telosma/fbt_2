@@ -78,6 +78,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::group(['middleware' => 'admin'], function() {
         Route::get('/', ['uses' => 'HomeController@index', 'as' => 'admin.home']);
 
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('monthly-revenue', ['uses' => 'HomeController@ajaxMonthlyRevenue', 'as' => 'admin.ajax.monthlyRevenue']);
+            Route::get('annual-turnover', ['uses' => 'HomeController@ajaxAnnualTurnover', 'as' => 'admin.ajax.annualTurnover']);
+        });
+
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', ['uses' => 'CategoryController@index', 'as' => 'admin.category.index']);
             Route::group(['prefix' => 'ajax'], function () {

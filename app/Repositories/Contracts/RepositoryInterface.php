@@ -22,4 +22,5 @@ interface RepositoryInterface
     public function remove();
     public function select($columns = ['*']);
     public function limit($value);
+    public function whereBetween($column, array $values, $boolean = 'and', $not = false);
 }

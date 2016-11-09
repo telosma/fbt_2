@@ -64,6 +64,12 @@
                         {!! trans('admin.tour_schedule') !!}
                     </a>
                 </li>
+                <li>
+                    <a href="{!! route('admin.user.index') !!}">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;
+                        {!! trans('admin.user') !!}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
