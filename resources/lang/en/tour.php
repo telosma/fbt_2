@@ -17,4 +17,6 @@ return [
     'title_create' => 'Create new tour',
     'title_update' => 'Update tour',
     'tour_not_exist' => 'Tour not exist!',
+    'sale_price' => '$ :price',
+    'null_preview_image' => 'No preview images available now',
 ];

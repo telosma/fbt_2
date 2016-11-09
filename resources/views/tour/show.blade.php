@@ -25,7 +25,7 @@
                         </h2>
                         <div class="detail-banner-price">
                             <span>
-                                <em class="sale-price">{{ $tour->price }}</em>
+                                <em class="sale-price">{{ trans('tour.sale_price', ['price' => $tour->price]) }}</em>
                             </span>
                         </div>
                         <div class="detail-banner-rating">
@@ -33,12 +33,13 @@
                             @if ($tour->rates_count)
                                 <span class="detail-num-rating">
                                     {{ trans('label.review.rate_from', ['num' => $tour->rates_count]) }}
+                                     <i class="fa fa-user"></i>
                                 </span>
                             @endif
                         </div>
                         <div class="detail-banner-btn write">
                             <i class="fa fa-pencil"></i>
-                            <span data-toggle="a b c">{{ trans('user.action.write_review') }}</span>
+                            <a href="#section-write-review">{{ trans('user.action.write_review') }}</a>
                         </div>
                     </div>
                 </div>
@@ -60,35 +61,64 @@
                     <h2>{{ trans('label.image_overview') }}</h2>
                 </div>
                 <div class="col-sm-7">
-                    <div class="detail-gallery">
-                        <div class="row">
-                            <!-- Carousel -->
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    @foreach($tour->images as $key => $image)
-                                        @if ($key == 0)
-                                            <li data-target="#carousel-example-generic" data-slide-to="{{ $key }}" class="active"></li>
-                                        @else
-                                            <li data-target="#carousel-example-generic" data-slide-to="{{ $key }}"></li>
-                                        @endif
-                                    @endforeach
-                                </ol>
-                                <div class="carousel-inner">
-                                    @foreach($tour->images as $key => $image)
-                                        <div class="item{{ $key == 0 ? ' active' : '' }}">
-                                            <img src="{{ $image->url }}">
-                                        </div>
-                                    @endforeach
+                    @if(empty($tour->images->toArray()))
+                        <div class="alert alert-info">
+                            {{ trans('tour.null_preview_image') }}
+                        </div>
+                    @else
+                        <div class="detail-gallery">
+                            <div class="row">
+                                <!-- Carousel -->
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        @foreach($tour->images as $key => $image)
+                                            @if ($key == 0)
+                                                <li data-target="#carousel-example-generic" data-slide-to="{{ $key }}" class="active"></li>
+                                            @else
+                                                <li data-target="#carousel-example-generic" data-slide-to="{{ $key }}"></li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        @foreach($tour->images as $key => $image)
+                                            <div class="item{{ $key == 0 ? ' active' : '' }}">
+                                                <img src="{{ $image->url }}">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div><!-- /carousel -->
+                            </div>
+                        </div>
+                    @endif
+                    <h2>{{ trans('label.description') }}</h2>
+                    <div class="bg-white p20">
+                        <div class="detail-description">
+                            <p>
+                                {!! $tour->description !!}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="bg-white p20">
+                        <div class="detail-overview-review">
+                            {{ trans('label.review.num_review', ['num' => $tour->reviews_count]) }}
+                        </div>
+                        <div class="detail-action row">
+                            <div class="col-sm-4">
+                                <div class="btn btn-book">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    {{ trans('label.choose_schedule') }}
                                 </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                </a>
-                            </div><!-- /carousel -->
+                            </div>
                         </div>
                     </div>
                     <h2>{{ trans('label.all_review') }}</h2>
@@ -116,6 +146,7 @@
                                     <div class="review-wrapper-content">
                                         <div class="review-content">
                                             {!! str_limit($review->text_preview, config('common.limit.text_preview')) !!}
+                                            <a href="{{ route('review.show', $review->id) }}">{{ trans('user.message.continue_reading') }}</a>
                                         </div>
                                         <div class="review-rating">
                                             <dl>
@@ -140,30 +171,7 @@
                         <span class="clear-fixed">{!! $reviews->links() !!}</span>
                     </div> <!-- reviews -->
                 </div>
-                <div class="col-sm-5">
-                    <div class="bg-white p20">
-                        <div class="detail-overview-review">
-                            {{ trans('label.review.num_review', ['num' => $tour->reviews_count]) }}
-                        </div>
-                        <div class="detail-action row">
-                            <div class="col-sm-4">
-                                <div class="btn btn-book">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    {{ trans('label.choose_schedule') }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <h2>{{ trans('label.description') }}</h2>
-                    <div class="bg-white p20">
-                        <div class="detail-description">
-                            <p>
-                                {{ $tour->description }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
+                <div class="col-sm-12" id="section-write-review">
                     <h2>{{ trans('label.review.submit') }}</h2>
                     {{ Form::open(['route' => 'postCreateReview', 'method' => 'post', 'class' => 'bg-white p20 add-review']) }}
                         <div class="row">
@@ -221,7 +229,9 @@
                                 @if (Auth::check())
                                     {!! Form::submit('Submit Review', ['class' => 'btn btn-info']) !!}
                                 @else
-                                    {{ trans('user.message.to_submit_review') }}
+                                    <a class="btn btn-info" data-toggle="modal" data-target="#login-modal">
+                                        {{ trans('user.message.to_submit_review') }}
+                                    </a>
                                 @endif
                             </div>
                         </div>
@@ -230,7 +240,6 @@
             </div>
         </div>
     </section>
-    @include('includes.modalAuth')
 @endsection
 @section('script')
     <script type="text/javascript">
