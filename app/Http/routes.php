@@ -72,7 +72,16 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
         'uses' => 'UserController@postRateTour',
         'as' => 'user.rateTour',
     ]);
+    Route::get('/profile', [
+        'as' => 'getProfile',
+        'uses' => 'UserController@profile',
+    ]);
 });
+
+Route::resource('bank-account', 'BankAccountController', ['only' => [
+    'store',
+    'destroy',
+]]);
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('login', ['uses' => 'AdminController@getLogin', 'as' => 'admin.getLogin']);

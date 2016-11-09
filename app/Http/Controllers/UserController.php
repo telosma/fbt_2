@@ -124,7 +124,7 @@ class UserController extends Controller
 
         return redirect()->back()->withErrors($err);
     }
-    
+
     public function postRateTour(RateTourRequest $request)
     {
         $rate = $this->rateRepository
@@ -158,5 +158,19 @@ class UserController extends Controller
             config('common.flash_notice') => trans('user.message.failed'),
             config('common.flash_level_key') => config('common.noty_status.error'),
         ];
+    }
+
+    public function profile()
+    {
+        $bankAccounts = null;
+        $bankAccounts = $this->bankAccountRepository->where('user_id', $this->userId)->get();
+        if($bankAccounts['status']) {
+            $bankAccounts = $bankAccounts['data'];
+        }
+
+        return view('user.profile', [
+            'user' => Auth::user(),
+            'bankAccounts' => $bankAccounts,
+        ]);
     }
 }
