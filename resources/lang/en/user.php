@@ -49,6 +49,7 @@ return [
         'null' => 'Review is not exists',
         'error_get_review' => 'Failed to show review',
         'login_add_comment' => 'Login to add comment',
+        'continue_reading' => 'Conntiue Reading',
     ],
     'name' => 'Name',
     'email' => 'Email',

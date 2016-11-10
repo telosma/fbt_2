@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{ trans('label.contact_us') }}</h4>
+                <h4 class="modal-title">{{ trans('label.contact') }}</h4>
             </div>
             <div class="box-warper">
                 <div class="row">

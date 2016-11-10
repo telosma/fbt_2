@@ -52,7 +52,7 @@ class AuthUserController extends Controller
             ];
         }
 
-        return redirect()->route('home')->with($message);
+        return redirect()->back()->with($message);
     }
 
     public function getSignout(Request $request)
