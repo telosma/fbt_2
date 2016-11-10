@@ -57,6 +57,7 @@ return [
         'success_add_bank' => 'New bank was added',
         'create_on_exist_bank' => ' Bank account has been existed',
         'confirm_delete_bank' => 'Are you sure want to delete this bank account?',
+        'failed_signin' => 'Login fail',
     ],
     'name' => 'Name',
     'email' => 'Email',

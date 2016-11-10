@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Repositories\Eloquents\{CategoryRepository, TourScheduleRepository, TourRepository};
+use App\Repositories\Eloquents\{
+    CategoryRepository,
+    TourScheduleRepository,
+    TourRepository,
+    PlaceRepository
+};
 use App\Http\Requests\ContactRequest;
 use Mail;
 
@@ -14,16 +19,19 @@ class HomeController extends Controller
     protected $categoryRepository;
     protected $tourScheduleRepository;
     protected $tourRepository;
+    protected $placeRepository;
 
     public function __construct(
         CategoryRepository $categoryRepository,
         TourScheduleRepository $tourScheduleRepository,
-        TourRepository $tourRepository
+        TourRepository $tourRepository,
+        PlaceRepository $placeRepository
     ) {
         $this->tourScheduleRepository = $tourScheduleRepository;
         $this->categoryRepository = $categoryRepository;
         $this->categories = $this->categoryRepository->withToursCount()->get()['data'];
         $this->tourRepository = $tourRepository;
+        $this->placeRepository = $placeRepository;
     }
 
     public function tourMenu($categoryCurrentId)
@@ -123,6 +131,23 @@ class HomeController extends Controller
             return redirect()->back()->with([
                 config('common.flash_notice') => trans('user.message.fail'),
                 config('common.flash_level_key') => config('common.flash_level.danger'),
+            ]);
+        }
+    }
+
+    public function getTourByPlace($id)
+    {
+        $place = $this->placeRepository
+            ->with(['tours' => function($query) {
+                $query->limit(config('common.limit.page_limit'));
+            }])
+            ->find($id);
+        $topTours = $this->tourRepository->limitTopRate(config('limit.tour_top'));
+        if ($place['status'] && $place['data'] && $topTours['data']) {
+            return view('tour.listByPlace', [
+                'tourMenu' => $this->tourMenu(null),
+                'tours' => $place['data']->tours,
+                'topTours' => $topTours['data'],
             ]);
         }
     }
