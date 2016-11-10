@@ -54,6 +54,10 @@ Route::get('review/{id}', [
     'as' => 'review.show',
     'uses' => 'ReviewController@show',
 ]);
+Route::get('/place/{id}/tours', [
+    'as' => 'getTourByPlace',
+    'uses' => 'HomeController@getTourByPlace',
+]);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('booking-cart', [

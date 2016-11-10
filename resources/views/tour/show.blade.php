@@ -69,7 +69,7 @@
                     <div class="detail-banner-address bg-white p20">
                         @foreach($tour->places as $key => $place)
                             <i class="fa fa-map-marker"></i>
-                            {{ $place->name }}
+                            <a href="{{ route('getTourByPlace', $place->id) }}">{{ $place->name }}</a>
                             @if (($key+1) != count($tour->places))
                                 <i class="fa fa-long-arrow-right"></i>
                             @endif
@@ -270,7 +270,7 @@
             STATUS: '{!! config('common.flash_level_key') !!}',
             MESSAGE: '{!! config('common.flash_notice') !!}'
         };
-        
+
     </script>
     {!! Html::script('js/jquery.noty.packaged.min.js') !!}
     {!! Html::script('js/userRateTour.js') !!}
