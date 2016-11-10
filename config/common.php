@@ -30,4 +30,12 @@ return [
         'github' => 'github',
     ],
     'schedule_date_format' => 'd-m-Y',
+    'noty_status' => [
+        'alert' => 'alert',
+        'notification' => 'notification',
+        'warning' => 'warning',
+        'error' => 'error',
+        'information' => 'information',
+        'success' => 'success',
+    ],
 ];

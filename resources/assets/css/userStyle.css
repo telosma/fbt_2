@@ -377,3 +377,10 @@ a, a:hover {
 a {
     outline: 0;
 }
+.sale-price:before {
+    content: '$';
+}
+.your-rate {
+    position: relative;
+    bottom: 4px;
+}
