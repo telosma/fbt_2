@@ -138,7 +138,7 @@
                             </div>
                         @else
                             <div class="modal-body">
-                                <a class="btn btn-info" href="#">{{ trans('user.message.new_bank_account') }}</a>
+                                <a class="btn btn-info" href="{{ route('getProfile') }}">{{ trans('user.message.new_bank_account') }}</a>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">

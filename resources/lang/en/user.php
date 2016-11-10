@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'profile' => 'Profile',
     'bill_cost' => '$ :cost',
     'action' => [
         'logout' => 'Logout',
@@ -18,6 +17,8 @@ return [
         'comment' => 'Comment',
         'edit' => 'Edit',
         'delete' => 'Delte',
+        'save_profile' => 'Save',
+        'add_bank_account' => 'Add new',
     ],
     'message' => [
         'reset_password' => 'Reset password :status!',
@@ -52,6 +53,10 @@ return [
         'login_add_comment' => 'Login to add comment',
         'continue_reading' => 'Conntiue Reading',
         'success_rate' => 'Rate successful!',
+        'null_bank_account' => 'No bank count',
+        'success_add_bank' => 'New bank was added',
+        'create_on_exist_bank' => ' Bank account has been existed',
+        'confirm_delete_bank' => 'Are you sure want to delete this bank account?',
     ],
     'name' => 'Name',
     'email' => 'Email',
@@ -63,4 +68,15 @@ return [
     'title_create' => 'Create new user',
     'title_update' => 'Update user',
     'reset_password' => 'Reset password',
+    'photo_action' => 'Click to upload avatar',
+    'profile' => [
+        'title' => 'Profile',
+        'message' => 'Your profile infomation',
+        'info' => 'Account',
+        'bank_account' => 'Bank account',
+        'name' => 'Name',
+        'email' => 'Email',
+        'modal_add_bank' => 'Add new bank account',
+        'your_bank_account' => 'Your bank account',
+    ],
 ];

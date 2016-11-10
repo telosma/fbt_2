@@ -32,7 +32,7 @@
                         {{ Auth::user()->name }}<span class="caret"></span>
                     </div>
                     <ul class="dropdown-menu pull-right dropdown-user-menu">
-                        <li><a href="#">{{ trans('user.profile') }}</a></li>
+                        <li><a href="{{ route('getProfile') }}">{{ trans('user.profile.title') }}</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('signout') }}">{{ trans('user.action.logout') }}</a></li>
                     </ul>
