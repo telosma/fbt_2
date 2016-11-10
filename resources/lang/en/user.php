@@ -2,6 +2,7 @@
 
 return [
     'bill_cost' => '$ :cost',
+    'cart' => 'Booking cart',
     'action' => [
         'logout' => 'Logout',
         'login' => 'Login',
@@ -58,6 +59,17 @@ return [
         'create_on_exist_bank' => ' Bank account has been existed',
         'confirm_delete_bank' => 'Are you sure want to delete this bank account?',
         'failed_signin' => 'Login fail',
+        'select_month' => 'Select month you want to start your travel',
+        'select_schedule' => 'Select Schedule',
+        'available_slot' => 'Available slot',
+        'noScheduleAvailable' => 'No schedule available now',
+        'num_slot' => 'Num slots',
+        'month' => 'Month',
+        'to' => 'To',
+        'from' => 'From',
+        'less_human' => 'Your order slots have to less than available slots',
+        'success_booking' => 'Successful',
+        'num_human' => 'Num humman',
     ],
     'name' => 'Name',
     'email' => 'Email',

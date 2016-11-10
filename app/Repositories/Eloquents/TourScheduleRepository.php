@@ -38,7 +38,6 @@ class TourScheduleRepository extends BaseRepository
                     $query->with('images');
             }])
             ->whereDate('start', '>', $today)
-            ->groupBy('tour_id')
             ->orderBy('start')
             ->limit(config('limit.tour_index'))
             ->get();

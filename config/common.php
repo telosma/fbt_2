@@ -7,6 +7,7 @@ return [
     'default_avatar' => 'default_user.png',
     'email_admin' => 'luuvu304@gmail.com',
     'max_rate_point' => 5,
+    'threshole_day' => 5,
     'publish_date_format' => 'l j F Y',
     'flash_level' => [
         'success' => 'success',

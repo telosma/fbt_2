@@ -133,6 +133,7 @@ abstract class BaseRepository implements RepositoryInterface
             return [
                 'status' => false,
                 'message' => $e->getMessage(),
+                'data' => null,
             ];
         }
     }
@@ -286,7 +287,5 @@ abstract class BaseRepository implements RepositoryInterface
     public function whereBetween($column, array $values, $boolean = 'and', $not = false)
     {
         $this->model = $this->model->whereBetween($column, $values, $boolean, $not);
-
-        return $this;
     }
 }

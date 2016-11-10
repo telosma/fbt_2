@@ -9,10 +9,13 @@ use App\Repositories\Eloquents\{
     BookingRepository,
     BankAccountRepository,
     PaymentRepository,
-    RateRepository
+    RateRepository,
+    TourRepository,
+    TourScheduleRepository
 };
 use Auth;
 use Stripe\{Stripe, Charge};
+use App\Http\Requests\BookingRequest;
 
 class UserController extends Controller
 {
@@ -20,19 +23,25 @@ class UserController extends Controller
     protected $bankAccountRepository;
     protected $paymentRepository;
     protected $rateRepository;
+    protected $tourRepository;
+    protected $tourScheduleRepository;
     protected $userId;
 
     public function __construct(
         BookingRepository $bookingRepository,
         BankAccountRepository $bankAccountRepository,
         PaymentRepository $paymentRepository,
-        RateRepository $rateRepository
+        RateRepository $rateRepository,
+        TourRepository $tourRepository,
+        TourScheduleRepository $tourScheduleRepository
     ) {
         $this->middleware('auth');
         $this->bookingRepository = $bookingRepository;
         $this->bankAccountRepository = $bankAccountRepository;
         $this->paymentRepository = $paymentRepository;
         $this->rateRepository = $rateRepository;
+        $this->tourRepository = $tourRepository;
+        $this->tourScheduleRepository = $tourScheduleRepository;
         $this->userId = Auth::user()->id;
     }
 
@@ -171,6 +180,38 @@ class UserController extends Controller
         return view('user.profile', [
             'user' => Auth::user(),
             'bankAccounts' => $bankAccounts,
+        ]);
+    }
+
+    public function postBookTour(BookingRequest $request)
+    {
+        $typeMessage = config('common.flash_level.danger');
+        $message = ('user.message.null_tour');
+        if ($this->tourRepository->find($request->tourId)['status']) {
+            $tourSchedule = $this->tourScheduleRepository->find($request->scheduleId)['data'];
+            if ($tourSchedule->available_slot < $request->numHuman) {
+                $message = trans('user.message.less_humman');
+            } else {
+                $availableSlotNow = $tourSchedule->available_slot - $request->numHuman;
+                $booking = $this->bookingRepository->create([
+                    'user_id' => $this->userId,
+                    'tour_schedule_id' => $request->scheduleId,
+                    'num_humans' => $request->numHuman,
+                    'status' => config('user.booking.new')
+                ]);
+                $tourSchedule->update(['available_slot' => $availableSlotNow]);
+                if ($booking['status']) {
+                    $message = trans('user.message.success_booking');
+                    $typeMessage = config('common.flash_level.success');
+                } else {
+                    $message = trans('user.message.fail');
+                }
+            }
+        }
+
+        return redirect()->back()->with([
+            config('common.flash_notice') => $message,
+            config('common.flash_level_key') => $typeMessage,
         ]);
     }
 }

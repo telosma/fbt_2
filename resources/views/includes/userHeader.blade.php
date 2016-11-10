@@ -33,6 +33,7 @@
                     </div>
                     <ul class="dropdown-menu pull-right dropdown-user-menu">
                         <li><a href="{{ route('getProfile') }}">{{ trans('user.profile.title') }}</a></li>
+                        <li><a href="{{ route('user.booking.index') }}">{{ trans('user.cart') }}</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('signout') }}">{{ trans('user.action.logout') }}</a></li>
                     </ul>
