@@ -39,12 +39,12 @@
                 </li>
             @else
                 <li>
-                    <a data-toggle="modal" data-target="#login-modal">
+                    <a data-toggle="modal" data-target="#login-modal" href="#">
                         {{ trans('user.action.login') }}
                     </a>
                 </li>
                 <li>
-                    <a class="last-element" data-toggle="modal" data-target="#register-modal">
+                    <a class="last-element" data-toggle="modal" data-target="#register-modal" href="#">
                         {{ trans('user.action.register') }}
                     </a>
                 </li>

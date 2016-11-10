@@ -16,4 +16,5 @@ return [
         'paid' => 1,
         'rejected' => 2,
     ],
+    'default_avatar' => 'avatar.png',
 ];

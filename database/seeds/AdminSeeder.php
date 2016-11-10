@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
             'email' => 'admin@bookingtour.vn',
             'password' => 'admin',
             'role' => config('user.role.admin'),
-            'avatar_link' => asset(config('upload.default_folder_path') . config('asset.default_avatar')),
+            'avatar_link' => config('user.default_avatar'),
             'type' => config('user.type.normal_user'),
         ]);
     }
