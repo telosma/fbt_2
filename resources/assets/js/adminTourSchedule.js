@@ -15,6 +15,7 @@ function tourSchedule(option) {
         'trans': {
             'title_create': 'Create new tour schedule',
             'title_update': 'Update tour schedule',
+            'confirm_delete': 'Do you want delete field? All tour with this category will be deleted.',
         },
     };
     this.buttonSubmitText = {
@@ -213,14 +214,12 @@ function tourSchedule(option) {
             current.loadZero();
         }
 
-        $('#form_modal').prop('action', current.url.ajaxCreate);
-        $('#modal-title').html(DatatableBase.lang.trans.title_create);
-        current.changeButtonSubmit('create');
         current.caculateEndDate();
     };
     this.loadCreateScheduleForm = function () {
         $('#form_modal').prop('action', current.url.ajaxCreate);
         $('#modal-title').html(DatatableBase.lang.trans.title_create);
+        current.changeButtonSubmit('create');
         $('.form-group').removeClass('has-error');
         $('[name=revenue_id]').children().prop('selected', false);
         $('[name=max_slot]').val('');
@@ -228,7 +227,6 @@ function tourSchedule(option) {
         $('[name=end]').val('');
     };
     this.showFormUpdate = function (rData) {
-        current.changeButtonSubmit('update');
         this.loadTourList();
         this.loadRevenueList();
         $('[name=tour_id]').children('option[value="' + rData.tour_id + '"]').prop('selected', true);
@@ -237,6 +235,8 @@ function tourSchedule(option) {
         $('[name=max_slot]').val(rData.max_slot);
         $('[name=start]').val(rData.start);
         $('[name=end]').val(rData.end);
+        $('#form_modal').prop('action', current.url.ajaxUpdate);
+        current.changeButtonSubmit('update');
     };
     this.caculateEndDate = function () {
         var startArray = $('[name=start]').val().split('-');

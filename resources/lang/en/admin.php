@@ -8,6 +8,7 @@ return [
     'email' => 'Email',
     'password' => 'Password',
     'submit' => 'Submit',
+    'not_the_admin' => 'Not the admin',
     'home' => 'Home',
     'monthly_revenue' => 'Monthly Revenue',
     'annual_turnover' => 'Annual turnover',

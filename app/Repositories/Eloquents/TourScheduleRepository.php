@@ -71,7 +71,7 @@ class TourScheduleRepository extends BaseRepository
                 $percent = 0;
             }
 
-            $tourScheduleParam['price'] = (1 - $percent / 100) * $tour->price;
+            $tourScheduleParam['price'] = round((1 - $percent / 100) * $tour->price);
 
             return parent::create($tourScheduleParam);
         } catch (Exception $ex) {
@@ -95,7 +95,7 @@ class TourScheduleRepository extends BaseRepository
                 $percent = 0;
             }
 
-            $tourScheduleParam['price'] = (1 - $percent / 100) * $tour->price;
+            $tourScheduleParam['price'] = round((1 - $percent / 100) * $tour->price);
 
             return parent::update($tourScheduleParam, $id);
         } catch (Exception $ex) {

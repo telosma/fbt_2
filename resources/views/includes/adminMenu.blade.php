@@ -70,6 +70,11 @@
                         {!! trans('admin.user') !!}
                     </a>
                 </li>
+                    <a href="{!! route('admin.booking.index') !!}">
+                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;
+                        {!! trans('admin.booking') !!}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

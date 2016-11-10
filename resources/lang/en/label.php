@@ -61,4 +61,6 @@ return [
         'serivce' => 'Service',
         'rate_from' => 'from :num',
     ],
+    'num_humans' => 'Number of humans',
+    'total_price' => 'Total price',
 ];

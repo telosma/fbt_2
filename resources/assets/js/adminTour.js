@@ -68,13 +68,20 @@ function tour(option) {
         },
         {'data': 'price'},
         {'data': 'num_day'},
-        {'data': 'rate_average'},
+        {
+            'data': function (source, type, val) {
+                if (source.rate_average === null || source.rate_average === '') {
+                    return 0;
+                }
+                return source.rate_average;
+            }
+        },
         {'data': 'reviews_count'},
         {
             'orderable': false,
             'searchable': false,
             'className': 'show-images center',
-            'defaultContent': '<i class="fa fa-picture-o" aria-hidden="true"></i>'
+            'defaultContent': '<i class="fa fa-picture-o tour-photo" aria-hidden="true"></i>'
         },
     ];
     this.buttons = [];

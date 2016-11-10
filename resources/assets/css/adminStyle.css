@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : hoanghoi
 */
 
-.has-chil, .delete, .edit, .modal-edit, .modal-delete {
+.has-chil, .delete, .edit, .modal-edit, .modal-delete, .tour-photo {
     color: blueviolet;
     cursor: pointer;
 }
