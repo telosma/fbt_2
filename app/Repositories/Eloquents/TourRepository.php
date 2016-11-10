@@ -85,7 +85,7 @@ class TourRepository extends BaseRepository
     public function update($param, $id)
     {
         $tourUpdate = parent::update($param['tour'], $id);
-        if ($tourUpdate['status']) {
+        if ($tourUpdate['status'] && isset($param['places'])) {
             $tourUpdate['data']->places()->detach();
             $places = [];
             foreach ($param['places'] as $placeId) {

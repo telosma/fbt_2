@@ -68,6 +68,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
         'uses' => 'UserController@postCheckout',
         'as' => 'user.checkout',
     ]);
+    Route::post('rate-tour', [
+        'uses' => 'UserController@postRateTour',
+        'as' => 'user.rateTour',
+    ]);
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {

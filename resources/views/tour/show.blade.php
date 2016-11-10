@@ -2,6 +2,7 @@
 
 @section('style')
     {!! Html::style('css/tourShow.css') !!}
+    {!! Html::style('css/animate.min.css') !!}
 @endsection
 
 @push('header')
@@ -36,10 +37,26 @@
                                      <i class="fa fa-user"></i>
                                 </span>
                             @endif
+                            <div id="rate-tour-block" class="input-rating" style="display: none">
+                                <span class="your-rate">{!! trans('user.your_rate') !!}</span>
+                                <span class="rating">
+                                    {!! Form::hidden('tour_id', $tour->id) !!}
+                                    @foreach (range(config('common.max_rate_point'), 1) as $i)
+                                        {!! Form::radio('rating_tour', $i, false, [
+                                            'id' => 'rating-tour-' . $i,
+                                            'class' => 'rating-input',
+                                        ]) !!}
+                                        {!! Form::label('rating-tour-' . $i, ' ', ['class' => 'rating-star']) !!}
+                                    @endforeach
+                                </span>
+                            </div>
                         </div>
                         <div class="detail-banner-btn write">
                             <i class="fa fa-pencil"></i>
                             <a href="#section-write-review">{{ trans('user.action.write_review') }}</a>
+                        </div>
+                        <div class="detail-banner-btn" id="rate-tour">
+                            {{ trans('user.action.rate_this_tour') }}
                         </div>
                     </div>
                 </div>
@@ -244,5 +261,17 @@
 @section('script')
     <script type="text/javascript">
         CKEDITOR.replace('rv-content');
+        RATEURL = '{!! route('user.rateTour') !!}';
+        LANG = {
+            CONFIRM_LOGIN: '{!! trans('user.message.auth_require') !!}',
+            ERROR: '{!! trans('user.message.error') !!}',
+        };
+        RESULT = {
+            STATUS: '{!! config('common.flash_level_key') !!}',
+            MESSAGE: '{!! config('common.flash_notice') !!}'
+        };
+        
     </script>
+    {!! Html::script('js/jquery.noty.packaged.min.js') !!}
+    {!! Html::script('js/userRateTour.js') !!}
 @endsection
